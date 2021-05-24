@@ -62,9 +62,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
                     <img  src="https://st3.depositphotos.com/5572200/12714/i/950/depositphotos_127142610-stock-photo-the-rolling-stones-logo.jpg" alt="pizza"/>
                     <p class="artist-name"> ${artist.artisticName}</p>
                     <ul>
-                      <li>Name: ${artist.name}</li>
-                      <li>Born Date: ${artist.bornDate.slice(0, 10)}</li>
-                      <li>Artist Description: <br>${
+                      <li><strong>Name</strong>: ${artist.name}</li>
+                      <li><strong>Born Date</strong>: ${artist.bornDate.slice(
+                        0,
+                        10
+                      )}</li>
+                      <li><strong>Artist Description</strong>: <br>${
                         artist.artistDescription
                       }</li>
                     </ul>
@@ -149,7 +152,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
-
+  fetchArtists();
   document.getElementById("fetch-btn").addEventListener("click", fetchArtists);
   document
     .getElementById("create-artist-frm")

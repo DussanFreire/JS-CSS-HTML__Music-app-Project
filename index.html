@@ -15,12 +15,18 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap"
       rel="stylesheet"
     />
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./vendors/css-boot/bootstrap.min.css"
+    />
   </head>
   <!-- header -->
   <header class="menu">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">BREAK-TIME</a>
+        <a class="navbar-brand" href="#">MUSIC-NOW</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -36,15 +42,20 @@
           <ul class="navbar-nav main-nav">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="./home.html"
-                >SOBRE NOSOTROS</a
+                >ARTISTS</a
               >
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active" href="./menu.html">Nuestras Pizzas</a>
+              <a class="nav-link active" href="./menu.html">SONGS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="./menu.html">Crea Tu Pizza</a>
+              <a class="nav-link active" href="./menu.html">
+                <div class="with-icon">
+                  <span>YOUR PROFILE</span>
+                  <ion-icon name="person-circle-outline"></ion-icon>
+                </div>
+              </a>
             </li>
           </ul>
         </div>
@@ -52,39 +63,148 @@
     </nav>
     <div class="row nav-row">
       <div class="logo-container">
-        <img
+        <!-- <img
           src="./resources/css/img/logo-piza.png"
           alt="logo de pizza"
           class="logo"
-        />
+        /> -->
       </div>
     </div>
     <div class="hero-text-box">
-      <h1>¿Que tipo de pizza buscas?</h1>
+      <h1>Opciones</h1>
       <div class="hero-btns">
-        <a class="btn btn-full" href="#clasicas">Pizzas Clasicas</a>
-        <a class="btn btn-full" href="#nuevas">Pizzas Nuevas</a>
-        <a class="btn btn-full" href="#ofertas">Ofertas</a>
+        <a class="btn btn-full" href="#aritsts-added">Artist's added</a>
+        <a class="btn btn-ghost" href="#new-artist">Add new artist</a>
+        <!-- <a class="btn btn-full" href="#ofertas">Ofertas</a> -->
       </div>
     </div>
   </header>
-
+  <!-- artists added -->
   <body>
-    <h1>Artist's added:</h1>
-    <div id="artists-container" class="destails-box"></div>
-    <button id="fetch-btn">Fetch artists</button>
+    <section id="aritsts-added">
+      <h2 id="#aritsts-added">Artist's added:</h2>
+      <div id="artists-container" class="destails-box"></div>
 
-    <h2>Add a new artist here:</h2>
-    <form id="create-artist-frm">
-      <label for="name">Name</label>
-      <input type="text" name="name" />
-      <label for="artisticName">Artistic Name</label>
-      <input type="text" name="artisticName" />
-      <label for="artistDescription">Artist Description</label>
-      <input type="text" name="artistDescription" />
-      <label for="bornDate">Born Date</label>
-      <input type="date" name="bornDate" />
-      <input type="submit" value="submit" />
-    </form>
+      <div class="btn-container">
+        <button id="fetch-btn" class="btn btn-full">
+          <div class=".with-icon">
+            <p>Reload</p>
+            <ion-icon name="reload-outline"></ion-icon>
+          </div>
+        </button>
+      </div>
+    </section>
+    <!-- new artist -->
+    <section id="new-artist">
+      <div class="form">
+        <div class="row">
+          <h2>Add a new artist here:</h2>
+        </div>
+        <div class="row">
+          <form
+            id="create-artist-frm"
+            method="post"
+            action="#"
+            class="contact-form"
+          >
+            <div class="row">
+              <div class="col span-1-of-3">
+                <label for="nombre">Name</label>
+              </div>
+              <div class="col span-2-of-3">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Artist real name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col span-1-of-3">
+                <label for="artisticName">Artistic Name</label>
+              </div>
+              <div class="col span-2-of-3">
+                <input
+                  type="text"
+                  name="artisticName"
+                  placeholder="Artist artistic name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col span-1-of-3">
+                <label for="artistDescription">Artist Description</label>
+              </div>
+              <div class="col span-2-of-3">
+                <input
+                  type="text"
+                  name="artistDescription"
+                  placeholder="Artist description"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col span-1-of-3">
+                <label for="bornDate">Born Date</label>
+              </div>
+              <div class="col span-2-of-3">
+                <input type="date" name="bornDate" required />
+              </div>
+            </div>
+            <div class="btn-container">
+              <input type="submit" value="Create Artist" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- fotter -->
+    <footer>
+      <div class="row">
+        <div class="col span-1-of-2">
+          <ul class="footer-nav">
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">iOS App</a></li>
+            <li><a href="#">Android App</a></li>
+          </ul>
+        </div>
+        <div class="col span-1-of-2">
+          <ul class="social-links">
+            <li>
+              <a href="#">
+                <ion-icon class="facebook-logo" name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/?lang=es " target="_blank">
+                <ion-icon class="twitter-logo" name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <ion-icon class="wpp-logo" name="logo-whatsapp"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <ion-icon
+                  class="instagram-logo"
+                  name="logo-instagram"
+                ></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <p>Esta pagina no representa una empresa real!</p>
+      </div>
+    </footer>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="./vendors/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
