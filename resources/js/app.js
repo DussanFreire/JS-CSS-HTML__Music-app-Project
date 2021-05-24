@@ -37,6 +37,18 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
+  function EditArtist(event) {
+    debugger;
+    let artistId = this.dataset.deleteArtistId;
+    let url = `${baseUrl}/artists/${artistId}`;
+    fetch(url, {
+      method: "PUT",
+    }).then((data) => {
+      if (data.status === 200) {
+        alert("deleted");
+      }
+    });
+  }
 
   async function fetchArtists() {
     const url = `${baseUrl}/artists`;
@@ -70,7 +82,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
                       data-edit-artist-artistDescription="${
                         artist.artistDescription
                       }
-                      
                       ">EDIT</button>
                    </div>
                 </div>`;
@@ -83,6 +94,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         );
         for (const button of buttons) {
           button.addEventListener("click", DeleteArtist);
+          // button.addEventListener("click", EditArtist);
         }
       } else {
         var errorText = await response.text();
