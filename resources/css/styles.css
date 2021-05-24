@@ -1,4 +1,4 @@
-#artists-container {
+.list-not-empty {
   /* background-color: rgb(35, 36, 36); */
   border: chartreuse;
   display: flex;
@@ -7,7 +7,7 @@
   justify-content: flex-start;
 }
 
-#artists-container > div {
+.list-not-empty > div.artist-photo {
   background-color: rgb(53, 53, 53);
   width: 90%;
   width: 20%;
@@ -26,7 +26,7 @@
   margin-top: 3%;
   margin-left: 6%;
 } */
-#artists-container ul li {
+.list-not-empty ul li {
   margin-top: 3%;
   margin-left: 0%;
   word-spacing: 2px;
@@ -34,7 +34,7 @@
   text-align: left;
 }
 
-#artists-container ul {
+.list-not-empty ul {
   list-style-type: none;
 }
 .plan-box {
@@ -69,7 +69,7 @@
   font-size: 110%;
   border-bottom: 2px solid #1db954;
 }
-#aritsts-added {
+#artsts-added {
   background-color: #054010;
   background-image: url(/resources/svg/Varying-Stripes.svg);
   background-attachment: fixed;
@@ -101,6 +101,46 @@
 
 .with-icon span {
   margin-right: 10px;
+}
+
+div .tittle {
+  font-size: 5rem;
+  text-align: center;
+  height: 90vh;
+  line-height: 90vh;
+  color: #fcedd8;
+  font-weight: 200;
+}
+.not-found {
+  width: 20%;
+}
+.not-found img {
+  width: 100%;
+  height: auto;
+}
+.not-found p {
+  padding: 3%;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 150%;
+  color: black;
+}
+.img-container div {
+  padding: 4%;
+  border-radius: 8px;
+  background-color: rgb(53, 53, 53);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+.img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 }
 /* ----------------------------------------------- */
 /* FORM */

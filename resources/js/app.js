@@ -53,7 +53,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   async function fetchArtists() {
     const url = `${baseUrl}/artists`;
     let response = await fetch(url);
-    // debugger;
+    debugger;
     try {
       if (response.status == 200) {
         let data = await response.json();
@@ -86,10 +86,18 @@ window.addEventListener("DOMContentLoaded", function (event) {
                         artist.artistDescription
                       }
                       ">EDIT</button>
-                   </div>
-                </div>`;
+                   </div>`;
         });
-        var artistContent = artistsLi.join("");
+        let empty = artistsLi.join("");
+        var artistContent =
+          data.length > 0
+            ? `<div class="list-not-empty destails-box">` + empty + "</div>"
+            : `<div class="img-container">
+        <div class="not-found">
+          <img src="/resources/img/new-empty.png" alt="not artists added" />
+          <p>empty list</p>
+        </div>
+      </div>`;
         document.getElementById("artists-container").innerHTML = artistContent;
 
         let buttons = document.querySelectorAll(
@@ -110,7 +118,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   }
 
   function PostArtist(event) {
-    debugger;
+    // debugger;
     event.preventDefault();
     let url = `${baseUrl}/artists`;
 
@@ -144,6 +152,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       body: JSON.stringify(data),
     }).then((response) => {
       if (response.status === 201) {
+        fetchArtists();
         alert("artist was created");
       } else {
         response.text().then((error) => {
