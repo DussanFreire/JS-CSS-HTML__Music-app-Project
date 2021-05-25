@@ -115,6 +115,7 @@ div .tittle {
   width: 20%;
 }
 .not-found img {
+  padding: 2% 15%;
   width: 100%;
   height: auto;
 }
@@ -128,7 +129,7 @@ div .tittle {
 .img-container div {
   padding: 4%;
   border-radius: 8px;
-  background-color: rgb(53, 53, 53);
+  background-color: #1db954;
   display: flex;
   flex-direction: column;
   justify-content: center;

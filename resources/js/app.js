@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }*/
 
   function DeleteArtist(event) {
-    debugger;
+    // debugger;
     let artistId = this.dataset.deleteArtistId;
     let url = `${baseUrl}/artists/${artistId}`;
     fetch(url, {
@@ -34,11 +34,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }).then((data) => {
       if (data.status === 200) {
         alert("deleted");
+        fetchArtists();
       }
     });
   }
   function EditArtist(event) {
-    debugger;
+    // debugger;
     let artistId = this.dataset.deleteArtistId;
     let url = `${baseUrl}/artists/${artistId}`;
     fetch(url, {
@@ -53,7 +54,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   async function fetchArtists() {
     const url = `${baseUrl}/artists`;
     let response = await fetch(url);
-    debugger;
+    // debugger;
     try {
       if (response.status == 200) {
         let data = await response.json();
@@ -86,7 +87,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
                         artist.artistDescription
                       }
                       ">EDIT</button>
-                   </div>`;
+                   </div></div>`;
         });
         let empty = artistsLi.join("");
         var artistContent =
