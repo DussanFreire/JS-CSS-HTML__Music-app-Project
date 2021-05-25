@@ -89,10 +89,18 @@ window.addEventListener("DOMContentLoaded", function (event) {
                       ">EDIT</button>
                    </div></div>`;
         });
-        let empty = artistsLi.join("");
+        let content = artistsLi.join("");
         var artistContent =
           data.length > 0
-            ? `<div class="list-not-empty destails-box">` + empty + "</div>"
+            ? `<input
+            type="text"
+            id="myInput"
+            onkeyup="searchFunction()"
+            placeholder="Search for an artist by artistic name ..."
+            title="Type in a name"
+          /><div class="list-not-empty destails-box"> ` +
+              content +
+              "</div>"
             : `<div class="img-container">
         <div class="not-found">
           <img src="/resources/img/new-empty.png" alt="not artists added" />
@@ -108,6 +116,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
           button.addEventListener("click", DeleteArtist);
           // button.addEventListener("click", EditArtist);
         }
+        searchFunction();
       } else {
         var errorText = await response.text();
         alert(errorText);
@@ -162,11 +171,28 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
+
   fetchArtists();
   document.getElementById("fetch-btn").addEventListener("click", fetchArtists);
   document
     .getElementById("create-artist-frm")
     .addEventListener("submit", PostArtist);
 });
-
+function searchFunction() {
+  debugger;
+  var input, filter, ul, divContent, a, i, txtValue, planBoxes, name;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  divContent = document.querySelector(".list-not-empty");
+  planBoxes = divContent.querySelectorAll(".plan-box");
+  for (i = 0; i < planBoxes.length; i++) {
+    name = planBoxes[i].getElementsByTagName("p")[0];
+    txtValue = name.textContent || name.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      planBoxes[i].style.display = "";
+    } else {
+      planBoxes[i].style.display = "none";
+    }
+  }
+}
 //https://www.freecodecamp.org/news/a-practical-es6-guide-on-how-to-perform-http-requests-using-the-fetch-api-594c3d91a547/
