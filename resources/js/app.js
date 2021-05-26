@@ -1,5 +1,4 @@
 window.addEventListener("DOMContentLoaded", function (event) {
-  let artists = [];
   const baseUrl = "http://localhost:16470/api";
 
   /*function fetchArtists()
@@ -38,17 +37,11 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
-  function EditArtist(event) {
+
+  function GoToEditArtist(event) {
     // debugger;
-    let artistId = this.dataset.deleteArtistId;
-    let url = `${baseUrl}/artists/${artistId}`;
-    fetch(url, {
-      method: "PUT",
-    }).then((data) => {
-      if (data.status === 200) {
-        alert("deleted");
-      }
-    });
+    let artistId = this.dataset.editArtistId;
+    window.location.href = `artist.html?artistId=${artistId}`;
   }
 
   async function fetchArtists() {
@@ -58,6 +51,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     try {
       if (response.status == 200) {
         let data = await response.json();
+        // debugger;
         let artistsLi = data.map((artist) => {
           return `<div class="plan-box artist-photo"> 
                     <img  src="https://st3.depositphotos.com/5572200/12714/i/950/depositphotos_127142610-stock-photo-the-rolling-stones-logo.jpg" alt="pizza"/>
@@ -77,16 +71,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
                       <button class="btn btn-full"  href="#clasicas" type="button" data-delete-artist-id="${
                         artist.id
                       }">DELETE</button>
-                      <button class="btn btn-ghost" href="#clasicas" data-edit-artist-id="${
+                      <button class="btn btn-ghost" href="#clasicas" type="button" data-edit-artist-id="${
                         artist.id
-                      }
-                      data-edit-artist-name="${artist.name}
-                      data-edit-artist-artisticName="${artist.artisticName}
-                      data-edit-artist-bornDate="${artist.bornDate}
-                      data-edit-artist-artistDescription="${
-                        artist.artistDescription
-                      }
-                      ">EDIT</button>
+                      }">EDIT</button>
                    </div></div>`;
         });
         let content = artistsLi.join("");
@@ -109,12 +96,17 @@ window.addEventListener("DOMContentLoaded", function (event) {
       </div>`;
         document.getElementById("artists-container").innerHTML = artistContent;
 
-        let buttons = document.querySelectorAll(
+        let buttonsForDelete = document.querySelectorAll(
           "#artists-container div button[data-delete-artist-id]"
         );
-        for (const button of buttons) {
+        for (const button of buttonsForDelete) {
           button.addEventListener("click", DeleteArtist);
-          // button.addEventListener("click", EditArtist);
+        }
+        let buttonsForUpdate = document.querySelectorAll(
+          "#artists-container div button[data-edit-artist-id]"
+        );
+        for (const button of buttonsForUpdate) {
+          button.addEventListener("click", GoToEditArtist);
         }
         searchFunction();
       } else {
@@ -179,7 +171,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     .addEventListener("submit", PostArtist);
 });
 function searchFunction() {
-  debugger;
+  // debugger;
   var input, filter, ul, divContent, a, i, txtValue, planBoxes, name;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
