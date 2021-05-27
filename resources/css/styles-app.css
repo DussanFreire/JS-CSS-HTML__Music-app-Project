@@ -8,7 +8,7 @@
 }
 
 .list-not-empty > div.artist-photo {
-  background-color: rgb(53, 53, 53);
+  background-color: rgba(0, 0, 0, 0.522);
   width: 90%;
   width: 20%;
   /* height: 30%; */
@@ -38,7 +38,7 @@
   list-style-type: none;
 }
 .plan-box {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.522);
   width: 90%;
   height: auto;
   border-radius: 5px;
@@ -68,12 +68,6 @@
   text-align: center;
   font-size: 110%;
   border-bottom: 2px solid #1db954;
-}
-#artsts-added {
-  background-color: #054010;
-  background-image: url(/resources/svg/Varying-Stripes.svg);
-  background-attachment: fixed;
-  background-size: cover;
 }
 
 .artist-photo img {

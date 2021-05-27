@@ -21,7 +21,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
     let artistId = this.dataset.editArtistId;
     window.location.href = `artist.html?artistId=${artistId}`;
   }
-
+  function formatDate(dateStr) {
+    dateDivided = dateStr.slice(0, 10).split("-");
+    return `${dateDivided[2]}-${dateDivided[1]}-${dateDivided[0]}`;
+  }
   async function fetchArtists() {
     const url = `${baseUrl}/artists`;
     let response = await fetch(url);
@@ -32,13 +35,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
         // debugger;
         let artistsLi = data.map((artist) => {
           return `<div class="plan-box artist-photo"> 
-                    <img  src="https://st3.depositphotos.com/5572200/12714/i/950/depositphotos_127142610-stock-photo-the-rolling-stones-logo.jpg" alt="pizza"/>
+                    <img  src="${artist.artistPhoto}" alt="artist"/>
                     <p class="artist-name"> ${artist.artisticName}</p>
                     <ul>
                       <li><strong>Name</strong>: ${artist.name}</li>
-                      <li><strong>Born Date</strong>: ${artist.bornDate.slice(
-                        0,
-                        10
+                      <li><strong>Born Date</strong>: ${formatDate(
+                        artist.bornDate
                       )}</li>
                       <li><strong>Artist Description</strong>: <br>${
                         artist.artistDescription
@@ -119,11 +121,17 @@ window.addEventListener("DOMContentLoaded", function (event) {
       return;
     }
 
+    if (!event.currentTarget.artistPhoto.value) {
+      event.currentTarget.artistPhoto.style.backgroundColor = "red";
+      return;
+    }
+
     var data = {
       Name: event.currentTarget.name.value,
       ArtisticName: event.currentTarget.artisticName.value,
       BornDate: event.currentTarget.bornDate.value,
       ArtistDescription: event.currentTarget.artistDescription.value,
+      ArtistPhoto: event.currentTarget.artistPhoto.value,
     };
 
     fetch(url, {
