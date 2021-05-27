@@ -1,28 +1,6 @@
 window.addEventListener("DOMContentLoaded", function (event) {
+  // window.addEventListener("DOMContentLoaded", function (event) {
   const baseUrl = "http://localhost:16470/api";
-
-  /*function fetchArtists()
-    {
-        debugger;
-        const url = `${baseUrl}/artists`;
-        let status;
-        fetch(url)
-        .then((response) => { 
-            status = response.status;
-            return response.json();
-        })
-        .then((data) => {
-            if(status == 200)
-            {
-                console.log(data)
-                let artistsLi = data.map( artist => { return `<li> Name: ${artist.name} | City: ${artist.city} | DT: ${artist.dtname} </li>`});
-                var artistContent = `<ul>${artistsLi.join('')}</ul>`;
-                document.getElementById('artists-container').innerHTML = artistContent;
-            } else {
-                alert(data);
-            }
-        });
-    }*/
 
   function DeleteArtist(event) {
     // debugger;
@@ -170,6 +148,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     .getElementById("create-artist-frm")
     .addEventListener("submit", PostArtist);
 });
+
 function searchFunction() {
   // debugger;
   var input, filter, ul, divContent, a, i, txtValue, planBoxes, name;
