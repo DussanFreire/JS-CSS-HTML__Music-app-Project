@@ -66,6 +66,14 @@ button.btn-full {
   color: #fff;
 }
 
+button.btn-delete {
+  background-color: black;
+  margin-top: 5px;
+  border: 1px solid #9e0707;
+  border: 1px solid #9e0707;
+  color: #9e0707;
+}
+
 button.btn-ghost {
   background-color: black;
   margin-top: 5px;
@@ -87,6 +95,12 @@ input[type="submit"] {
   border: 1px solid #1db954;
   border: 1px solid #1db954;
   color: #1db954;
+}
+.btn-delete:link,
+.btn-delete:visited {
+  border: 1px solid #9e0707;
+  border: 1px solid #9e0707;
+  color: #9e0707;
 }
 
 .btn:hover,
@@ -397,4 +411,38 @@ iframe {
   100% {
     background-position: 0% 50%;
   }
+}
+
+/* notr found image */
+.not-found {
+  width: 20%;
+}
+.not-found img {
+  padding: 2% 15%;
+  width: 100%;
+  height: auto;
+}
+.not-found p {
+  padding: 3%;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 150%;
+  color: black;
+}
+.img-container div {
+  padding: 4%;
+  border-radius: 8px;
+  background-color: #1db954;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+.img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 }

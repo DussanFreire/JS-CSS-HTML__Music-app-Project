@@ -42,18 +42,20 @@ window.addEventListener("DOMContentLoaded", function (event) {
                       <li><strong>Born Date</strong>: ${formatDate(
                         artist.bornDate
                       )}</li>
-                      <li><strong>Artist Description</strong>: <br>${
+                      <li><strong>Artist Description</strong>: ${
                         artist.artistDescription
                       }</li>
                     </ul>
                    
                     <div class="btn-container">
-                      <button class="btn btn-full"  href="#clasicas" type="button" data-delete-artist-id="${
-                        artist.id
-                      }">DELETE</button>
-                      <button class="btn btn-ghost" href="#clasicas" type="button" data-edit-artist-id="${
+                      
+                      <button class="btn btn-full" href="#" type="button" data-edit-artist-id="${
                         artist.id
                       }">EDIT</button>
+
+                      <button class="btn btn-ghost"  href="#" type="button" data-delete-artist-id="${
+                        artist.id
+                      }">DELETE</button>
                    </div></div>`;
         });
         let content = artistsLi.join("");
@@ -71,7 +73,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
             : `<div class="img-container">
         <div class="not-found">
           <img src="/resources/img/new-empty.png" alt="not artists added" />
-          <p>empty list</p>
+          <p>empty</p>
         </div>
       </div>`;
         document.getElementById("artists-container").innerHTML = artistContent;
@@ -149,7 +151,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
-
   fetchArtists();
   document.getElementById("fetch-btn").addEventListener("click", fetchArtists);
   document
@@ -157,6 +158,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     .addEventListener("submit", PostArtist);
 });
 
+//https://www.freecodecamp.org/news/a-practical-es6-guide-on-how-to-perform-http-requests-using-the-fetch-api-594c3d91a547/
 function searchFunction() {
   // debugger;
   var input, filter, ul, divContent, a, i, txtValue, planBoxes, name;
@@ -174,4 +176,3 @@ function searchFunction() {
     }
   }
 }
-//https://www.freecodecamp.org/news/a-practical-es6-guide-on-how-to-perform-http-requests-using-the-fetch-api-594c3d91a547/

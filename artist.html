@@ -64,18 +64,105 @@
           </div>
         </div>
       </nav>
-
-      <!-- artist -->
-
-      <div id="artist-container"></div>
+      <div id="prof-img"></div>
       <div class="form-btns">
         <button id="back-to-menu" class="btn btn-full f-btn">Go Back</button>
+        <a href="#edit-artist" class="btn btn-full f-btn"> Edit Artist </a>
+        <a href="#albums-added" class="btn btn-full f-btn"> Albums</a>
+      </div>
+    </header>
+    <!-- artist -->
+
+    <section id="edit-artist">
+      <div id="artist-container"></div>
+      <div class="form-btns">
         <button id="save-changes" class="btn btn-full f-btn">
           Save Changes
         </button>
       </div>
-    </header>
+    </section>
+    <!-- albums -->
+    <section id="albums-added">
+      <h2>Album's added:</h2>
+      <div id="albums-container"></div>
+      <div class="btn-container">
+        <button id="fetch-btn" class="btn btn-ghost">
+          <div class=".with-icon">
+            <p>Reload</p>
+            <ion-icon name="reload-outline"></ion-icon>
+          </div>
+        </button>
+      </div>
+    </section>
+    <!-- new album -->
+    <section id="new-album">
+      <div class="form">
+        <div class="row">
+          <h2>Add a new album here:</h2>
+        </div>
+        <div class="row">
+          <form
+            id="create-album-frm"
+            method="post"
+            action="#"
+            class="contact-form"
+          >
+            <div class="row">
+              <div class="col span-1-of-3">
+                <label for="name">Album Name</label>
+              </div>
+              <div class="col span-2-of-3">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Album Name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col span-1-of-3">
+                <label for="albumDescription">Album Description</label>
+              </div>
+              <div class="col span-2-of-3">
+                <input
+                  type="text"
+                  name="albumDescription"
+                  placeholder="Album Description"
+                  required
+                />
+              </div>
+            </div>
 
+            <div class="row">
+              <div class="col span-1-of-3">
+                <label for="albumPhoto">Album Photo</label>
+              </div>
+              <div class="col span-2-of-3">
+                <input
+                  type="text"
+                  name="albumPhoto"
+                  placeholder="Album Photo"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col span-1-of-3">
+                <label for="releaseDate">Release Date</label>
+              </div>
+              <div class="col span-2-of-3">
+                <input type="date" name="releaseDate" required />
+              </div>
+            </div>
+            <div class="btn-container">
+              <input type="submit" value="Create Album" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
     <!-- fotter -->
 
     <footer>

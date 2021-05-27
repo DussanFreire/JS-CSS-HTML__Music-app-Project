@@ -34,13 +34,7 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-#edit-artist {
-  background-color: black;
-  background-position: center; /* centrar la imagen */
-  background-size: cover; /*to see all the image  */
-  height: 100vh; /* 100  view port*/
-  background-attachment: fixed;
-}
+
 section.artist-section {
   padding: 20px 0;
 }
