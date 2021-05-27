@@ -339,7 +339,7 @@ footer p {
   width: 60%;
   margin: 0 auto;
 }
-
+input[type="password"],
 input[type="text"],
 input[type="date"],
 select,

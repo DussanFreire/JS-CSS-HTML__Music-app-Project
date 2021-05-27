@@ -1,0 +1,23 @@
+div.form {
+  margin-top: 10px;
+}
+.artist-photo img {
+  opacity: 0.9;
+  width: 30%;
+  margin: 0% 30% 4% 30%;
+  height: auto;
+  transform: scale(1);
+  transition: transform 1s;
+  border-radius: 50%;
+}
+.artist-photo {
+  margin-top: 0%;
+  width: 50%;
+  height: auto;
+  border-radius: 5px;
+  padding-top: 2%;
+  font-size: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
