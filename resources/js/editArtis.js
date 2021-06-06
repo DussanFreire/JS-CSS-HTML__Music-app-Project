@@ -1,8 +1,6 @@
 const baseUrl = "http://localhost:16470/api";
 var queryParams = window.location.search.split("?");
 var artistId = queryParams[1].split("=")[1];
-// var queryParams = window.location.search.slice(1).split("&").map(x=>x.split('=')) ;
-// var artistId = queryParams[1].split("=")[1];
 const url = `${baseUrl}/artists/${artistId}`;
 
 function formatDate(dateStr) {
@@ -134,187 +132,131 @@ function createAlbumHTML(album) {
 }
 
 function searchFunction() {
-  // debugger;
-  var input, filter, ul, divContent, a, i, txtValue, planBoxes, name;
+  var input, filter, divContent, txtValue, planBoxes, name;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
   divContent = document.querySelector(".list-not-empty");
   planBoxes = divContent.querySelectorAll(".plan-box");
-  for (i = 0; i < planBoxes.length; i++) {
-    name = planBoxes[i].getElementsByTagName("p")[0];
+  for (const box of planBoxes) {
+    name = box.getElementsByTagName("p")[0];
     txtValue = name.textContent || name.innerText;
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      planBoxes[i].style.display = "";
+      box.style.display = "";
     } else {
-      planBoxes[i].style.display = "none";
+      box.style.display = "none";
     }
   }
 }
+function DeleteAlbum(event) {
+  // debugger;
+  let albumId = this.dataset.deleteAlbumId;
+  const urlAlbum = `${url}/albums/${albumId}`;
+  fetch(urlAlbum, {
+    method: "DELETE",
+  }).then((data) => {
+    if (data.status === 200) {
+      alert("deleted");
+      fetchAlbums();
+    }
+  });
+}
+function GoToEditAlbum(event) {
+  let albumId = this.dataset.editAlbumId;
+  window.location.href = `album.html?artistId=${artistId}&albumId=${albumId}`;
+}
+function fetchArtist() {
+  let status;
+  fetch(url)
+    .then((response) => {
+      // debugger;
+      console.log(response);
+      status = response.status;
+      return response.json();
+    })
+    .then((data) => {
+      if (status == 200) {
+        console.log(data);
+        let form = createForm(data);
 
-window.addEventListener("load", function (event) {
-  function GoToEditAlbum(event) {
-    let albumId = this.dataset.editAlbumId;
-    window.location.href = `album.html?artistId=${artistId}&albumId=${albumId}`;
-  }
-  function fetchArtist() {
-    let status;
-    fetch(url)
-      .then((response) => {
-        // debugger;
-        console.log(response);
-        status = response.status;
-        return response.json();
-      })
-      .then((data) => {
-        if (status == 200) {
-          console.log(data);
-          let form = createForm(data);
-
-          document.getElementById("artist-container").innerHTML = form;
-          document.getElementById(
-            "prof-img"
-          ).innerHTML = `<div class="artist-photo"><img src="${data.artistPhoto}" alt="pizza" /></div>`;
-        } else {
-          alert(data);
-        }
-      });
-  }
-  function DeleteAlbum(event) {
-    // debugger;
-    let albumId = this.dataset.deleteAlbumId;
-    const urlAlbum = `${url}/albums/${albumId}`;
-    fetch(urlAlbum, {
-      method: "DELETE",
-    }).then((data) => {
-      if (data.status === 200) {
-        alert("deleted");
-        fetchAlbums();
+        document.getElementById("artist-container").innerHTML = form;
+        document.getElementById(
+          "prof-img"
+        ).innerHTML = `<div class="artist-photo"><img src="${data.artistPhoto}" alt="pizza" /></div>`;
+      } else {
+        alert(data);
       }
     });
-  }
-  async function fetchAlbums() {
-    const urlAlbums = `${url}/albums`;
-    let response = await fetch(urlAlbums);
-    // debugger;
-    try {
-      if (response.status == 200) {
-        let data = await response.json();
-        // debugger;
-        let albumsLi = data.map((album) => {
-          return createAlbumHTML(album);
-        });
-        let content = albumsLi.join("");
-        var albumContent =
-          data.length > 0
-            ? `<input
-            type="text"
-            id="myInput"
-            onkeyup="searchFunction()"
-            placeholder="Search for an album by name ..."
-            title="Type in a name"
-          /><div class="list-not-empty destails-box"> ` +
-              content +
-              "</div>"
-            : `<div class="img-container">
-        <div class="not-found">
-          <img src="/resources/img/new-empty.png" alt="not album added" />
-          <p>empty</p>
-        </div>
-      </div>`;
-        document.getElementById("albums-container").innerHTML = albumContent;
+}
 
-        let buttonsForDelete = document.querySelectorAll(
-          "#albums-container div button[data-delete-album-id]"
-        );
-        for (const button of buttonsForDelete) {
-          button.addEventListener("click", DeleteAlbum);
-        }
-        let buttonsForUpdate = document.querySelectorAll(
-          "#albums-container div button[data-edit-album-id]"
-        );
-        for (const button of buttonsForUpdate) {
-          button.addEventListener("click", GoToEditAlbum);
-        }
-        searchFunction();
-      } else {
-        var errorText = await response.text();
-        alert(errorText);
+async function fetchAlbums() {
+  const urlAlbums = `${url}/albums`;
+  let response = await fetch(urlAlbums);
+  // debugger;
+  try {
+    if (response.status == 200) {
+      let data = await response.json();
+      // debugger;
+      let albumsLi = data.map((album) => {
+        return createAlbumHTML(album);
+      });
+      let content = albumsLi.join("");
+      var albumContent =
+        data.length > 0
+          ? `<input
+          type="text"
+          id="myInput"
+          onkeyup="searchFunction()"
+          placeholder="Search for an album by name ..."
+          title="Type in a name"
+        /><div class="list-not-empty destails-box"> ` +
+            content +
+            "</div>"
+          : `<div class="img-container">
+      <div class="not-found">
+        <img src="/resources/img/new-empty.png" alt="not album added" />
+        <p>empty</p>
+      </div>
+    </div>`;
+      document.getElementById("albums-container").innerHTML = albumContent;
+
+      let buttonsForDelete = document.querySelectorAll(
+        "#albums-container div button[data-delete-album-id]"
+      );
+      for (const button of buttonsForDelete) {
+        button.addEventListener("click", DeleteAlbum);
       }
-    } catch (error) {
-      var errorText = await error.text();
+      let buttonsForUpdate = document.querySelectorAll(
+        "#albums-container div button[data-edit-album-id]"
+      );
+      for (const button of buttonsForUpdate) {
+        button.addEventListener("click", GoToEditAlbum);
+      }
+      searchFunction();
+    } else {
+      var errorText = await response.text();
       alert(errorText);
     }
+  } catch (error) {
+    var errorText = await error.text();
+    alert(errorText);
   }
-  fetchAlbums();
-  fetchArtist();
-});
+}
+fetchAlbums();
+fetchArtist();
 
 window.addEventListener("DOMContentLoaded", function (event) {
-  function GoToEditAlbum(event) {
-    let albumId = this.dataset.editAlbumId;
-    window.location.href = `album.html?artistId=${artistId}&albumId=${albumId}`;
-  }
-  function DeleteAlbum(event) {
-    // debugger;
-    let albumId = this.dataset.deleteAlbumId;
-    const urlAlbum = `${url}/albums/${albumId}`;
-    fetch(urlAlbum, {
-      method: "DELETE",
-    }).then((data) => {
-      if (data.status === 200) {
-        alert("deleted");
-        fetchAlbums();
-      }
-    });
-  }
-
-  function fetchArtist() {
-    let status;
-    fetch(url)
-      .then((response) => {
-        // debugger;
-        console.log(response);
-        status = response.status;
-        return response.json();
-      })
-      .then((data) => {
-        if (status == 200) {
-          console.log(data);
-          let form = createForm(data);
-          document.getElementById("artist-container").innerHTML = form;
-          document.getElementById(
-            "prof-img"
-          ).innerHTML = `<div class="artist-photo"><img src="${data.artistPhoto}" alt="pizza" /></div>`;
-        } else {
-          alert(data);
-        }
-      });
-  }
   // PUT
   function UpdateArtist(event) {
     // debugger;
     event.preventDefault();
     form = document.getElementById("edit-artist-form");
-    if (!form.name.value) {
-      form.name.style.backgroundColor = "red";
-      return;
+    for (const inputSpace of event.currentTarget) {
+      if (!inputSpace) {
+        inputSpace.style.backgroundColor = "red";
+        return;
+      }
     }
-    if (!form.artisticName.value) {
-      form.artisticName.style.backgroundColor = "red";
-      return;
-    }
-    if (!form.bornDate.value) {
-      form.bornDate.style.backgroundColor = "red";
-      return;
-    }
-    if (!form.artistDescription.value) {
-      form.artistDescription.style.backgroundColor = "red";
-      return;
-    }
-    if (!form.artistPhoto.value) {
-      form.artistPhoto.style.backgroundColor = "red";
-      return;
-    }
+
     var data = {
       Name: form.name.value,
       ArtisticName: form.artisticName.value,
@@ -338,79 +280,16 @@ window.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
-  async function fetchAlbums() {
-    const urlAlbums = `${url}/albums`;
-    let response = await fetch(urlAlbums);
-    try {
-      if (response.status == 200) {
-        let data = await response.json();
-        // debugger;
-        let albumsLi = data.map((album) => {
-          return createAlbumHTML(album);
-        });
-        let content = albumsLi.join("");
-        var albumContent =
-          data.length > 0
-            ? `<input
-            type="text"
-            id="myInput"
-            onkeyup="searchFunction()"
-            placeholder="Search for an album by name ..."
-            title="Type in a name"
-          /><div class="list-not-empty destails-box"> ` +
-              content +
-              "</div>"
-            : `<div class="img-container">
-        <div class="not-found">
-          <img src="/resources/img/new-empty.png" alt="not album added" />
-          <p>empty</p>
-        </div>
-      </div>`;
-        document.getElementById("albums-container").innerHTML = albumContent;
-
-        let buttonsForDelete = document.querySelectorAll(
-          "#albums-container div button[data-delete-album-id]"
-        );
-        for (const button of buttonsForDelete) {
-          button.addEventListener("click", DeleteAlbum);
-        }
-        let buttonsForUpdate = document.querySelectorAll(
-          "#albums-container div button[data-edit-album-id]"
-        );
-        for (const button of buttonsForUpdate) {
-          button.addEventListener("click", GoToEditAlbum);
-        }
-        searchFunction();
-      } else {
-        var errorText = await response.text();
-        alert(errorText);
-      }
-    } catch (error) {
-      var errorText = await error.text();
-      alert(errorText);
-    }
-  }
   // create album
   function PostAlbum(event) {
     event.preventDefault();
     const urlAlbums = `${url}/albums`;
 
-    if (!event.currentTarget.name.value) {
-      event.currentTarget.name.style.backgroundColor = "red";
-      return;
-    }
-    if (!event.currentTarget.albumDescription.value) {
-      event.currentTarget.albumDescription.style.backgroundColor = "red";
-      return;
-    }
-    if (!event.currentTarget.releaseDate.value) {
-      event.currentTarget.releaseDate.style.backgroundColor = "red";
-      return;
-    }
-
-    if (!event.currentTarget.albumPhoto.value) {
-      event.currentTarget.albumPhoto.style.backgroundColor = "red";
-      return;
+    for (const inputSpace of event.currentTarget) {
+      if (!inputSpace) {
+        inputSpace.style.backgroundColor = "red";
+        return;
+      }
     }
 
     var data = {
@@ -437,10 +316,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
-  function GoToArtists(event) {
-    // debugger;
-    window.location.href = `index.html#artsts-added`;
-  }
   document
     .getElementById("create-album-frm")
     .addEventListener("submit", PostAlbum);
