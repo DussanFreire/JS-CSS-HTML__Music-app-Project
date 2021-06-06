@@ -3,15 +3,16 @@ var queryParams = window.location.search.split("?");
 var artistId = queryParams[1].split("=")[1];
 const url = `${baseUrl}/artists/${artistId}`;
 
+function GoToArtists(event) {
+  // debugger;
+  window.location.href = `index.html#artsts-added`;
+}
 function formatDate(dateStr) {
   dateDivided = dateStr.slice(0, 10).split("-");
   return `${dateDivided[2]}-${dateDivided[1]}-${dateDivided[0]}`;
 }
 function createForm(artist) {
-  const location = window.location.href;
-  return `
-  
-<section id="new-artist" class="artist-section">
+  return `<section id="new-artist" class="artist-section">
   <div class="form">
     <div class="row">
       <h2>Edit the artist here:</h2>
@@ -151,14 +152,15 @@ function DeleteAlbum(event) {
   // debugger;
   let albumId = this.dataset.deleteAlbumId;
   const urlAlbum = `${url}/albums/${albumId}`;
-  fetch(urlAlbum, {
-    method: "DELETE",
-  }).then((data) => {
-    if (data.status === 200) {
-      alert("deleted");
-      fetchAlbums();
-    }
-  });
+  if (window.confirm(`Are you sure to delete this artist from the list?`)) {
+    fetch(urlAlbum, {
+      method: "DELETE",
+    }).then((data) => {
+      if (data.status === 200) {
+        location.reload();
+      }
+    });
+  }
 }
 function GoToEditAlbum(event) {
   let albumId = this.dataset.editAlbumId;
@@ -241,6 +243,7 @@ async function fetchAlbums() {
     alert(errorText);
   }
 }
+
 fetchAlbums();
 fetchArtist();
 
@@ -250,13 +253,26 @@ window.addEventListener("DOMContentLoaded", function (event) {
     // debugger;
     event.preventDefault();
     form = document.getElementById("edit-artist-form");
-    for (const inputSpace of event.currentTarget) {
-      if (!inputSpace) {
-        inputSpace.style.backgroundColor = "red";
-        return;
-      }
+    if (!form.name.value) {
+      form.name.style.backgroundColor = "red";
+      return;
     }
-
+    if (!form.artisticName.value) {
+      form.artisticName.style.backgroundColor = "red";
+      return;
+    }
+    if (!form.bornDate.value) {
+      form.bornDate.style.backgroundColor = "red";
+      return;
+    }
+    if (!form.artistDescription.value) {
+      form.artistDescription.style.backgroundColor = "red";
+      return;
+    }
+    if (!form.artistPhoto.value) {
+      form.artistPhoto.style.backgroundColor = "red";
+      return;
+    }
     var data = {
       Name: form.name.value,
       ArtisticName: form.artisticName.value,
@@ -271,7 +287,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }).then((response) => {
       if (response.status === 200) {
         alert("artist was edited");
-        fetchArtist();
+        location.reload();
       } else {
         response.text().then((error) => {
           alert(error);
@@ -306,7 +322,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       body: JSON.stringify(data),
     }).then((response) => {
       if (response.status === 201) {
-        fetchAlbums();
+        location.reload();
         alert("Album was created");
       } else {
         response.text().then((error) => {
