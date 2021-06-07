@@ -340,6 +340,7 @@ footer p {
   margin: 0 auto;
 }
 input[type="password"],
+input[type="file"],
 input[type="text"],
 input[type="date"],
 select,

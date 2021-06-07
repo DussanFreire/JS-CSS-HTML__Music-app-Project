@@ -1,4 +1,5 @@
-const baseUrl = "http://localhost:16470/api";
+const baseRawUrl = "http://localhost:16470";
+const baseUrl = baseRawUrl + "/api";
 
 function DeleteArtist(event) {
   // debugger;
@@ -43,14 +44,17 @@ function searchFunction() {
 async function fetchArtists() {
   const url = `${baseUrl}/artists`;
   let response = await fetch(url);
-  // debugger;
+  debugger;
   try {
     if (response.status == 200) {
       let data = await response.json();
       // debugger;
       let artistsLi = data.map((artist) => {
+        const imageUrl = artist.imagePath
+          ? `${baseRawUrl}/${artist.imagePath}`
+          : "";
         return `<div class="plan-box artist-photo"> 
-                  <img  src="${artist.artistPhoto}" alt="artist"/>
+                  <img  src="${imageUrl}" alt="artist"/>
                   <p class="artist-name"> ${artist.artisticName}</p>
                   <ul>
                     <li><strong>Name</strong>: ${artist.name}</li>
@@ -124,7 +128,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   function PostArtist(event) {
     debugger;
     event.preventDefault();
-    let url = `${baseUrl}/artists`;
+    let url = `${baseUrl}/artists/form`;
 
     for (const inputSpace of event.currentTarget) {
       if (!inputSpace) {
@@ -133,18 +137,19 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     }
 
-    var data = {
-      Name: event.currentTarget.name.value,
-      ArtisticName: event.currentTarget.artisticName.value,
-      BornDate: event.currentTarget.bornDate.value,
-      ArtistDescription: event.currentTarget.artistDescription.value,
-      ArtistPhoto: event.currentTarget.artistPhoto.value,
-    };
+    const formData = new FormData();
+    formData.append("Name", event.currentTarget.name.value);
+    formData.append("ArtisticName", event.currentTarget.artisticName.value);
+    formData.append("BornDate", event.currentTarget.bornDate.value);
+    formData.append(
+      "ArtistDescription",
+      event.currentTarget.artistDescription.value
+    );
+    formData.append("Image", event.currentTarget.image.files[0]);
 
     fetch(url, {
-      headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
-      body: JSON.stringify(data),
+      body: formData,
     }).then((response) => {
       if (response.status === 201) {
         location.reload();

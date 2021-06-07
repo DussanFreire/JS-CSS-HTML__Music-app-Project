@@ -1,4 +1,5 @@
-const baseUrl = "http://localhost:16470/api";
+const baseRawUrl = "http://localhost:16470";
+const baseUrl = baseRawUrl + "/api";
 var queryParams = window.location.search.split("?");
 var artistId = queryParams[1].split("=")[1];
 const url = `${baseUrl}/artists/${artistId}`;
@@ -179,11 +180,13 @@ function fetchArtist() {
       if (status == 200) {
         console.log(data);
         let form = createForm(data);
-
+        const imageUrl = data.imagePath
+          ? `${baseRawUrl}/${data.imagePath}`
+          : "";
         document.getElementById("artist-container").innerHTML = form;
         document.getElementById(
           "prof-img"
-        ).innerHTML = `<div class="artist-photo"><img src="${data.artistPhoto}" alt="pizza" /></div>`;
+        ).innerHTML = `<div class="artist-photo"><img src="${imageUrl}" alt="artist" /></div>`;
       } else {
         alert(data);
       }
