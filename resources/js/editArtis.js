@@ -12,11 +12,10 @@ function formatDate(dateStr) {
   dateDivided = dateStr.slice(0, 10).split("-");
   return `${dateDivided[2]}-${dateDivided[1]}-${dateDivided[0]}`;
 }
-function createForm(artist) {
-  return `<section id="new-artist" class="artist-section">
+function createInfoForm(artist) {
+  return `<section id="new-artist" class="artist-section setting-form">
   <div class="form">
     <div class="row">
-      <h2>Edit the artist here:</h2>
     </div>
     <div class="row">
       <form
@@ -68,20 +67,6 @@ function createForm(artist) {
           </div>
         </div>
         <div class="row">
-            <div class="col span-1-of-3">
-              <label for="artistPhoto">Artist Photo</label>
-            </div>
-            <div class="col span-2-of-3">
-              <input
-                type="text"
-                value="${artist.artistPhoto}"
-                name="artistPhoto"
-                placeholder="Artist Photo"
-                required
-              />
-            </div>
-          </div>
-        <div class="row">
           <div class="col span-1-of-3">
             <label for="bornDate">Born Date</label>
           </div>
@@ -96,12 +81,46 @@ function createForm(artist) {
        
       </form>
     </div>
+</section>
+
+`;
+}
+function createImgForm(artist) {
+  return `    <section id="new-artist" class="artist-section setting-form form--hidden">
+  <div class="form">
+    <div class="row">
+    </div>
+    <div class="row">
+      <form
+        id="edit-artist-img-form"
+        method="post"
+        action="#"
+        class="contact-form"
+      >
+        <div class="row">
+          <div class="col span-1-of-3">
+            <label for="Image">Image</label>
+          </div>
+          <div class="col span-2-of-3">
+            <input
+              type="file"
+              value="${artist.imagePath}"
+              placeholder="Image"
+              name="image"
+              required
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </section>`;
 }
 
 function createAlbumHTML(album) {
+  const imageUrl = album.imagePath ? `${baseRawUrl}/${album.imagePath}` : "";
   return `<div class="plan-box album-photo">
-  <img src="${album.albumPhoto}" alt="album" />
+  <img src="${imageUrl}" alt="album" />
   <p class="artist-name"> ${album.name}</p>
   <ul>
     <li>
@@ -179,11 +198,13 @@ function fetchArtist() {
     .then((data) => {
       if (status == 200) {
         console.log(data);
-        let form = createForm(data);
+        let form = createInfoForm(data);
+        let imgForm = createImgForm(data);
         const imageUrl = data.imagePath
           ? `${baseRawUrl}/${data.imagePath}`
           : "";
         document.getElementById("artist-container").innerHTML = form;
+        document.getElementById("artist-container-img").innerHTML = imgForm;
         document.getElementById(
           "prof-img"
         ).innerHTML = `<div class="artist-photo"><img src="${imageUrl}" alt="artist" /></div>`;
@@ -252,7 +273,8 @@ fetchArtist();
 
 window.addEventListener("DOMContentLoaded", function (event) {
   // PUT
-  function UpdateArtist(event) {
+
+  function UpdateArtistInfo(event) {
     // debugger;
     event.preventDefault();
     form = document.getElementById("edit-artist-form");
@@ -272,16 +294,12 @@ window.addEventListener("DOMContentLoaded", function (event) {
       form.artistDescription.style.backgroundColor = "red";
       return;
     }
-    if (!form.artistPhoto.value) {
-      form.artistPhoto.style.backgroundColor = "red";
-      return;
-    }
+
     var data = {
       Name: form.name.value,
       ArtisticName: form.artisticName.value,
       BornDate: form.bornDate.value,
       ArtistDescription: form.artistDescription.value,
-      ArtistPhoto: form.artistPhoto.value,
     };
     fetch(url, {
       headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -299,11 +317,38 @@ window.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
+  function UpdateArtistPhoto(event) {
+    debugger;
+    const urlAlbums = `${url}/form`;
+    event.preventDefault();
+    form = document.getElementById("edit-artist-img-form");
+
+    if (!form.image.value) {
+      form.image.style.backgroundColor = "red";
+      return;
+    }
+    const formData = new FormData();
+    formData.append("Image", form.image.files[0]);
+
+    fetch(urlAlbums, {
+      method: "PUT",
+      body: formData,
+    }).then((response) => {
+      if (response.status === 200) {
+        alert("artist was edited");
+        location.reload();
+      } else {
+        response.text().then((error) => {
+          alert(error);
+        });
+      }
+    });
+  }
+
   // create album
   function PostAlbum(event) {
     event.preventDefault();
-    const urlAlbums = `${url}/albums`;
-
+    const urlAlbums = `${url}/albums/form`;
     for (const inputSpace of event.currentTarget) {
       if (!inputSpace) {
         inputSpace.style.backgroundColor = "red";
@@ -311,18 +356,19 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     }
 
-    var data = {
-      Name: event.currentTarget.name.value,
-      ReleaseDate: event.currentTarget.releaseDate.value,
-      AlbumDescription: event.currentTarget.albumDescription.value,
-      AlbumPhoto: event.currentTarget.albumPhoto.value,
-    };
+    const formData = new FormData();
+    formData.append("Name", event.currentTarget.name.value);
+    formData.append("ReleaseDate", event.currentTarget.releaseDate.value);
+    formData.append(
+      "AlbumDescription",
+      event.currentTarget.albumDescription.value
+    );
+    formData.append("Image", event.currentTarget.image.files[0]);
     debugger;
 
     fetch(urlAlbums, {
-      headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
-      body: JSON.stringify(data),
+      body: formData,
     }).then((response) => {
       if (response.status === 201) {
         location.reload();
@@ -334,14 +380,35 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
+  function switchForm() {
+    debugger;
+    let infoForm = document.querySelectorAll(".setting-form");
+    let infoBtn = document.querySelectorAll(".save-btn");
+    let btn = document.getElementById("switch-frm");
+    let text = btn.textContent;
+    btn.textContent =
+      text != "Edit Image" ? "Edit Image" : "Edit Artist Information";
+    infoBtn.forEach((element) => {
+      element.classList.toggle("form--hidden");
+    });
 
+    infoForm.forEach((element) => {
+      element.classList.toggle("form--hidden");
+    });
+  }
+  document.getElementById("switch-frm").addEventListener("click", switchForm);
   document
     .getElementById("create-album-frm")
     .addEventListener("submit", PostAlbum);
 
   document
-    .getElementById("save-changes")
-    .addEventListener("click", UpdateArtist);
+    .getElementById("save-info-changes")
+    .addEventListener("click", UpdateArtistInfo);
+
+  document
+    .getElementById("save-img-changes")
+    .addEventListener("click", UpdateArtistPhoto);
+
   document
     .getElementById("back-to-menu")
     .addEventListener("click", GoToArtists);

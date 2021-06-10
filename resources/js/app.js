@@ -153,7 +153,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }).then((response) => {
       if (response.status === 201) {
         location.reload();
-        alert("artist was created");
+        alert("Artist was created");
       } else {
         response.text().then((error) => {
           alert(error);

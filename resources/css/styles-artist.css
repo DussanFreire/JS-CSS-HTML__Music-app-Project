@@ -128,3 +128,6 @@ section.artist-section {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
+.form--hidden {
+  display: none;
+}

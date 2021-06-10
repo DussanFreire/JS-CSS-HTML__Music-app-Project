@@ -74,10 +74,20 @@
     <!-- artist -->
 
     <section id="edit-artist">
-      <div id="artist-container"></div>
+      <h2>Edit the artist here:</h2>
       <div class="form-btns">
-        <button id="save-changes" class="btn btn-full f-btn">
-          Save Changes
+        <button id="switch-frm" class="btn btn-ghost f-btn">Edit Image</button>
+      </div>
+      <div id="artist-container"></div>
+      <div class="form-btns save-btn">
+        <button id="save-info-changes" class="btn btn-full f-btn">
+          Save Information Changes
+        </button>
+      </div>
+      <div id="artist-container-img"></div>
+      <div class="form-btns save-btn form--hidden">
+        <button id="save-img-changes" class="btn btn-full f-btn">
+          Save New Image
         </button>
       </div>
     </section>
@@ -136,24 +146,19 @@
 
             <div class="row">
               <div class="col span-1-of-3">
-                <label for="albumPhoto">Album Photo</label>
+                <label for="releaseDate">Release Date</label>
               </div>
               <div class="col span-2-of-3">
-                <input
-                  type="text"
-                  name="albumPhoto"
-                  placeholder="Album Photo"
-                  required
-                />
+                <input type="date" name="releaseDate" required />
               </div>
             </div>
 
             <div class="row">
               <div class="col span-1-of-3">
-                <label for="releaseDate">Release Date</label>
+                <label for="Image">Image</label>
               </div>
               <div class="col span-2-of-3">
-                <input type="date" name="releaseDate" required />
+                <input type="file" name="image" required />
               </div>
             </div>
             <div class="btn-container">
