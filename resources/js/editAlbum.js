@@ -1,4 +1,5 @@
-const baseUrl = "http://localhost:16470/api";
+const baseRawUrl = "http://localhost:16470";
+const baseUrl = baseRawUrl + "/api";
 var queryParams = window.location.search
   .slice(1)
   .split("&")
@@ -113,7 +114,6 @@ window.addEventListener("load", function (event) {
     let status;
     fetch(url)
       .then((response) => {
-        debugger;
         console.log(response);
         status = response.status;
         return response.json();
@@ -123,10 +123,14 @@ window.addEventListener("load", function (event) {
           console.log(data);
           let form = createForm(data);
 
+          const imageUrl = data.imagePath
+            ? `${baseRawUrl}/${data.imagePath}`
+            : "";
+          let imgForm = `<div class="artist-photo"><img src="${imageUrl}" alt="pizza" /></div>`;
+          debugger;
+
           document.getElementById("album-container").innerHTML = form;
-          document.getElementById(
-            "prof-img"
-          ).innerHTML = `<div class="artist-photo"><img src="${data.albumPhoto}" alt="pizza" /></div>`;
+          document.getElementById("prof-img").innerHTML = imgForm;
         } else {
           alert(data);
         }

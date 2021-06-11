@@ -447,3 +447,6 @@ iframe {
   align-items: center;
   height: auto;
 }
+.form--hidden {
+  display: none;
+}
