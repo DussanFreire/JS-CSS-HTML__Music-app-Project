@@ -16,10 +16,9 @@ function formatDate(dateStr) {
 function createForm(album) {
   return `
     
-  <section id="new-artist" class="artist-section">
+  <section id="new-artist" class="artist-section setting-form">
   <div class="form">
     <div class="row">
-      <h2>Edit album here:</h2>
     </div>
     <div class="row">
       <form id="edit-artist-form" method="post" action="#" class="contact-form">
@@ -54,21 +53,6 @@ function createForm(album) {
 
         <div class="row">
           <div class="col span-1-of-3">
-            <label for="albumPhoto">Album Photo</label>
-          </div>
-          <div class="col span-2-of-3">
-            <input
-              type="text"
-              name="albumPhoto"
-              value="${album.albumPhoto}"
-              placeholder="Album Photo"
-              required
-            />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col span-1-of-3">
             <label for="releaseDate">Release Date</label>
           </div>
           <div class="col span-2-of-3">
@@ -84,9 +68,39 @@ function createForm(album) {
       </form>
     </div>
   </div>
-</section>;`;
+</section>`;
 }
-
+function createImgForm(album) {
+  return `    <section id="new-artist" class="artist-section setting-form form--hidden">
+  <div class="form">
+    <div class="row">
+    </div>
+    <div class="row">
+      <form
+        id="edit-artist-img-form"
+        method="post"
+        action="#"
+        class="contact-form"
+      >
+        <div class="row">
+          <div class="col span-1-of-3">
+            <label for="Image">Image</label>
+          </div>
+          <div class="col span-2-of-3">
+            <input
+              type="file"
+              value="${album.imagePath}"
+              placeholder="Image"
+              name="image"
+              required
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>`;
+}
 function searchFunction() {
   // debugger;
   var input, filter, ul, divContent, a, i, txtValue, planBoxes, name;
@@ -105,68 +119,40 @@ function searchFunction() {
   }
 }
 
-window.addEventListener("load", function (event) {
-  function GoToEditAlbum(event) {
-    let albumId = this.dataset.editAlbumId;
-    window.location.href = `album.html?artistId=${artistId}&albumId=${albumId}`;
-  }
-  function fetchAlbum() {
-    let status;
-    fetch(url)
-      .then((response) => {
-        console.log(response);
-        status = response.status;
-        return response.json();
-      })
-      .then((data) => {
-        if (status == 200) {
-          console.log(data);
-          let form = createForm(data);
+function fetchAlbum() {
+  let status;
+  fetch(url)
+    .then((response) => {
+      console.log(response);
+      status = response.status;
+      return response.json();
+    })
+    .then((data) => {
+      if (status == 200) {
+        console.log(data);
+        let form = createForm(data);
+        let imgForm = createImgForm(data);
+        const imageUrl = data.imagePath
+          ? `${baseRawUrl}/${data.imagePath}`
+          : "";
+        let albumImg = `<div class="artist-photo"><img src="${imageUrl}" alt="pizza" /></div>`;
+        debugger;
 
-          const imageUrl = data.imagePath
-            ? `${baseRawUrl}/${data.imagePath}`
-            : "";
-          let imgForm = `<div class="artist-photo"><img src="${imageUrl}" alt="pizza" /></div>`;
-          debugger;
+        document.getElementById("album-container").innerHTML = form;
+        document.getElementById("artist-container-img").innerHTML = imgForm;
+        document.getElementById("prof-img").innerHTML = albumImg;
+      } else {
+        alert(data);
+      }
+    });
+}
 
-          document.getElementById("album-container").innerHTML = form;
-          document.getElementById("prof-img").innerHTML = imgForm;
-        } else {
-          alert(data);
-        }
-      });
-  }
-
-  fetchAlbum();
-});
-
+fetchAlbum();
 window.addEventListener("DOMContentLoaded", function (event) {
   function GoToArtist(event) {
     window.location.href = `artist.html?artistId=${artistId}`;
   }
 
-  function fetchAlbum() {
-    let status;
-    fetch(url)
-      .then((response) => {
-        // debugger;
-        console.log(response);
-        status = response.status;
-        return response.json();
-      })
-      .then((data) => {
-        if (status == 200) {
-          console.log(data);
-          let form = createForm(data);
-          document.getElementById("album-container").innerHTML = form;
-          document.getElementById(
-            "prof-img"
-          ).innerHTML = `<div class="artist-photo"><img src="${data.albumPhoto}" alt="pizza" /></div>`;
-        } else {
-          alert(data);
-        }
-      });
-  }
   // PUT
   function UpdateArtist(event) {
     debugger;
@@ -184,15 +170,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
       form.releaseDate.style.backgroundColor = "red";
       return;
     }
-    if (!form.albumPhoto.value) {
-      form.albumPhoto.style.backgroundColor = "red";
-      return;
-    }
     var data = {
       Name: form.name.value,
       AlbumDescription: form.albumDescription.value,
       ReleaseDate: form.releaseDate.value,
-      AlbumPhoto: form.albumPhoto.value,
     };
     fetch(url, {
       headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -200,9 +181,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
       body: JSON.stringify(data),
     }).then((response) => {
       if (response.status === 200) {
-        alert("album was edited");
+        alert("Album was edited");
         debugger;
-        fetchAlbum();
+        location.reload();
       } else {
         response.text().then((error) => {
           alert(error);
@@ -211,8 +192,55 @@ window.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
+  function UpdateArtistPhoto(event) {
+    debugger;
+    const urlAlbums = `${url}/form`;
+    event.preventDefault();
+    form = document.getElementById("edit-artist-img-form");
+
+    if (!form.image.value) {
+      form.image.style.backgroundColor = "red";
+      return;
+    }
+    const formData = new FormData();
+    formData.append("Image", form.image.files[0]);
+
+    fetch(urlAlbums, {
+      method: "PUT",
+      body: formData,
+    }).then((response) => {
+      if (response.status === 200) {
+        alert("artist was edited");
+        location.reload();
+      } else {
+        response.text().then((error) => {
+          alert(error);
+        });
+      }
+    });
+  }
+  function switchForm() {
+    debugger;
+    let infoForm = document.querySelectorAll(".setting-form");
+    let infoBtn = document.querySelectorAll(".save-btn");
+    let btn = document.getElementById("switch-frm");
+    let text = btn.textContent;
+    btn.textContent =
+      text != "Edit Image" ? "Edit Image" : "Edit Artist Information";
+    infoBtn.forEach((element) => {
+      element.classList.toggle("form--hidden");
+    });
+
+    infoForm.forEach((element) => {
+      element.classList.toggle("form--hidden");
+    });
+  }
+  document.getElementById("switch-frm").addEventListener("click", switchForm);
   document
-    .getElementById("save-changes")
+    .getElementById("save-info-changes")
     .addEventListener("click", UpdateArtist);
+  document
+    .getElementById("save-img-changes")
+    .addEventListener("click", UpdateArtistPhoto);
   document.getElementById("back-to-menu").addEventListener("click", GoToArtist);
 });
