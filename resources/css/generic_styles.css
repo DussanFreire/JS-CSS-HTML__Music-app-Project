@@ -339,6 +339,7 @@ footer p {
   width: 60%;
   margin: 0 auto;
 }
+input[type="email"],
 input[type="password"],
 input[type="file"],
 input[type="text"],

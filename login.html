@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <script src="resources/js/script.js"></script>
-    <link rel="stylesheet" href="resources/css/styles-app.css" />
+    <script src="resources/js/loginScript.js"></script>
     <link rel="stylesheet" href="resources/css/styles-login.css" />
     <link rel="stylesheet" href="resources/css/generic_styles.css" />
     <link rel="stylesheet" href="vendors/css/grid.css" />
@@ -49,14 +48,13 @@
         <div class="form">
             <div id="prof-img">
                 <div class="artist-photo">
-                    <img src="resources/img/login.jpg" alt="pizza" />
+                    <img src="resources/img/login.png" alt="pizza" />
                 </div>
             </div>
             <div class="row">
-              <h2>Login Please:</h2>
+              <h2>Log in Please:</h2>
             </div>
             <div class="row">
-                <div id="login-errors" style="display: none; color: red"></div>
               <form
                 id="create-artist-frm"
                 method="post"
@@ -69,7 +67,7 @@
                   </div>
                   <div class="col span-2-of-3">
                     <input
-                      type="text"
+                      type="email"
                       name="userName"
                       placeholder="User Name"
                       id="form-user-name"
@@ -92,8 +90,14 @@
                   </div>
                 </div>
                 
-                <div class="btn-container">
-                  <input type="submit" value="Login" />
+                <div id="login" class="btn-container">
+
+                  <div id="login-errors"></div>
+
+                  <input class="btn-submit" type="submit" value="Log in" />
+
+                  <a id="create-account-btn" href="#" class="btn btn-ghost"> Create new account</a> 
+
                 </div>
               </form>
             </div>

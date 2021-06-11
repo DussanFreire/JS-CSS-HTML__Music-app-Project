@@ -34,16 +34,24 @@ window.addEventListener("load", (event) => {
           response.text().then((data) => {
             debugger;
             console.log(data);
+            usernameErrorElement = document.getElementById("login-errors");
+            usernameErrorElement.textContent = "Wrong username or password";
+            usernameErrorElement.style.display = "block";
           });
         }
       })
       .catch((response) => {
-        debugger;
         console.log(data);
       });
   }
 
+  function goToCreateAccount() {
+    window.location.href = "account-sign-up.html";
+  }
   document
     .getElementById("create-artist-frm")
     .addEventListener("submit", login);
+  document
+    .getElementById("create-account-btn")
+    .addEventListener("click", goToCreateAccount);
 });
