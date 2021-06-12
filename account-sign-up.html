@@ -107,16 +107,30 @@
 
                 <div class="row">
                     <div class="col span-1-of-3">
-                      <label for="roleName">Role</label>
+                      <label for="roleAdmin">Admin Role</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <select name="roleName" id="form-role">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
+                      <input
+                      type="checkbox"
+                      name="roleAdmin"
+                      id="form-adm"
+                      value="Admin"
+                    />
                     </div>
                 </div>
-                
+                <div class="row">
+                  <div class="col span-1-of-3">
+                    <label for="roleUser">User Role</label>
+                  </div>
+                  <div class="col span-2-of-3">
+                    <input
+                    type="checkbox"
+                    name="roleUser"
+                    id="form-usr"
+                    value="Admin"
+                  />
+                  </div>
+              </div>
                 <div id="login" class="btn-container">
 
                   <div id="login-errors"></div>
