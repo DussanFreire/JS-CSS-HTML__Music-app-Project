@@ -1,11 +1,11 @@
 window.addEventListener("load", (event) => {
-  const baseUrl = "http://localhost:16470/api";
+  const baseUrl = "http://localhost:16470/api/auth";
   function login(event) {
     debugger;
     console.log(event.currentTarget);
     event.preventDefault();
-    const url = `${baseUrl}/auth/Login`;
-
+    const userUrl = `${baseUrl}/User`;
+    const userRoleUrl = `${baseUrl}/UserRole`;
     if (!Boolean(event.currentTarget.userName.value)) {
       var usernameErrorElement = document.getElementById("login-errors");
       usernameErrorElement.textContent = "username is requered";
@@ -13,35 +13,39 @@ window.addEventListener("load", (event) => {
       return;
     }
 
-    var data = {
+    var createUserData = {
       Email: event.currentTarget.userName.value,
       Password: event.currentTarget.password.value,
+      ConfirmPassword: event.currentTarget.confirmPassword.value,
+    };
+    var createUserRoleData = {
+      UserName: event.currentTarget.userName.value,
+      RoleName: event.currentTarget.roleName.value,
     };
 
-    fetch(url, {
+    fetch(userUrl, {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(createUserData),
     })
       .then((response) => {
+        if (response.status !== 200) {
+          throw new Error(`Error (${response.status})`);
+        }
+        return fetch(userRoleUrl, {
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          method: "POST",
+          body: JSON.stringify(createUserRoleData),
+        });
+      })
+      .then((response) => {
         if (response.status === 200) {
-          response.json().then((data) => {
-            debugger;
-            sessionStorage.setItem("jwt", data.message);
-            window.location.href = "index.html";
-          });
-        } else {
-          response.text().then((data) => {
-            debugger;
-            console.log(data);
-            usernameErrorElement = document.getElementById("login-errors");
-            usernameErrorElement.textContent = "Wrong username or password";
-            usernameErrorElement.style.display = "block";
-          });
+          alert("Account created!");
+          window.location.href = "login.html";
         }
       })
       .catch((response) => {
-        console.log(data);
+        console.log(response);
       });
   }
 
