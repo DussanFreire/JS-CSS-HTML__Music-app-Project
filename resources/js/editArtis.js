@@ -1,3 +1,6 @@
+if (!Boolean(sessionStorage.getItem("jwt"))) {
+  window.location.href = "login.html";
+}
 const baseRawUrl = "http://localhost:16470";
 const baseUrl = baseRawUrl + "/api";
 var queryParams = window.location.search.split("?");
@@ -174,6 +177,9 @@ function DeleteAlbum(event) {
   const urlAlbum = `${url}/albums/${albumId}`;
   if (window.confirm(`Are you sure to delete this artist from the list?`)) {
     fetch(urlAlbum, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
       method: "DELETE",
     }).then((data) => {
       if (data.status === 200) {
@@ -188,7 +194,13 @@ function GoToEditAlbum(event) {
 }
 function fetchArtist() {
   let status;
-  fetch(url)
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+    },
+    method: "GET",
+  })
     .then((response) => {
       // debugger;
       console.log(response);
@@ -216,7 +228,13 @@ function fetchArtist() {
 
 async function fetchAlbums() {
   const urlAlbums = `${url}/albums`;
-  let response = await fetch(urlAlbums);
+  let response = await fetch(urlAlbums, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+    },
+    method: "GET",
+  });
   // debugger;
   try {
     if (response.status == 200) {
@@ -302,7 +320,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
       ArtistDescription: form.artistDescription.value,
     };
     fetch(url, {
-      headers: { "Content-Type": "application/json; charset=utf-8" },
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
       method: "PUT",
       body: JSON.stringify(data),
     }).then((response) => {
@@ -331,6 +352,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
     formData.append("Image", form.image.files[0]);
 
     fetch(urlAlbums, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
       method: "PUT",
       body: formData,
     }).then((response) => {
@@ -367,6 +391,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
     debugger;
 
     fetch(urlAlbums, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
       method: "POST",
       body: formData,
     }).then((response) => {

@@ -1,3 +1,7 @@
+if (!Boolean(sessionStorage.getItem("jwt"))) {
+  window.location.href = "login.html";
+}
+
 const baseRawUrl = "http://localhost:16470";
 const baseUrl = baseRawUrl + "/api";
 
@@ -7,6 +11,10 @@ function DeleteArtist(event) {
   let url = `${baseUrl}/artists/${artistId}`;
   if (window.confirm(`Are you sure to delete this artist from the list?`)) {
     fetch(url, {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
       method: "DELETE",
     }).then((data) => {
       if (data.status === 200) {
@@ -16,7 +24,7 @@ function DeleteArtist(event) {
   }
 }
 function GoToEditArtist(event) {
-  // debugger;
+  debugger;
   let artistId = this.dataset.editArtistId;
   window.location.href = `artist.html?artistId=${artistId}`;
 }
@@ -43,7 +51,13 @@ function searchFunction() {
 }
 async function fetchArtists() {
   const url = `${baseUrl}/artists`;
-  let response = await fetch(url);
+  let response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+    },
+    method: "GET",
+  });
   debugger;
   try {
     if (response.status == 200) {
@@ -120,13 +134,9 @@ async function fetchArtists() {
   }
 }
 fetchArtists();
-// if (!Boolean(sessionStorage.getItem("jwt"))) {
-//   window.location.href = "login.html";
-// }
 
 window.addEventListener("DOMContentLoaded", function (event) {
   function PostArtist(event) {
-    debugger;
     event.preventDefault();
     let url = `${baseUrl}/artists/form`;
 
@@ -146,10 +156,14 @@ window.addEventListener("DOMContentLoaded", function (event) {
       event.currentTarget.artistDescription.value
     );
     formData.append("Image", event.currentTarget.image.files[0]);
+    debugger;
 
     fetch(url, {
-      method: "POST",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
       body: formData,
+      method: "POST",
     }).then((response) => {
       if (response.status === 201) {
         location.reload();
@@ -161,6 +175,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
+
   document.getElementById("fetch-btn").addEventListener("click", fetchArtists);
   document
     .getElementById("create-artist-frm")

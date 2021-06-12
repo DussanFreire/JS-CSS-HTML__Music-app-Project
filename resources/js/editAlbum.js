@@ -1,3 +1,6 @@
+if (!Boolean(sessionStorage.getItem("jwt"))) {
+  window.location.href = "login.html";
+}
 const baseRawUrl = "http://localhost:16470";
 const baseUrl = baseRawUrl + "/api";
 var queryParams = window.location.search
@@ -121,7 +124,13 @@ function searchFunction() {
 
 function fetchAlbum() {
   let status;
-  fetch(url)
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+    },
+    method: "GET",
+  })
     .then((response) => {
       console.log(response);
       status = response.status;
@@ -176,7 +185,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
       ReleaseDate: form.releaseDate.value,
     };
     fetch(url, {
-      headers: { "Content-Type": "application/json; charset=utf-8" },
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+        "Content-Type": "application/json; charset=utf-8",
+      },
       method: "PUT",
       body: JSON.stringify(data),
     }).then((response) => {
@@ -206,6 +218,9 @@ window.addEventListener("DOMContentLoaded", function (event) {
     formData.append("Image", form.image.files[0]);
 
     fetch(urlAlbums, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
       method: "PUT",
       body: formData,
     }).then((response) => {
