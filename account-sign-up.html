@@ -2,9 +2,166 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <script src="resources/js/createAcount.js"></script>
+    <link rel="stylesheet" href="resources/css/styles-account-create.css" />
+    <link rel="stylesheet" href="resources/css/generic_styles.css" />
+    <link rel="stylesheet" href="vendors/css/grid.css" />
+    <link rel="stylesheet" href="vendors/css/normalize.css" />
+    <!-- font family -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./vendors/css-boot/bootstrap.min.css"
+    />
   </head>
-  <body></body>
+
+  <body>
+    <header >
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">MUSIC-NOW</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"> </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav main-nav"></ul>
+          </div>
+        </div>
+      </nav>
+      <section id="new-artist">
+        <div class="form">
+            <div id="prof-img">
+                <div class="artist-photo">
+                    <img src="resources/img/login.png" alt="pizza" />
+                </div>
+            </div>
+            <div class="row">
+              <h2>Fill the spaces Please:</h2>
+            </div>
+            <div class="row">
+              <form
+                id="create-artist-frm"
+                method="post"
+                action="#"
+                class="contact-form"
+              >
+                <div class="row">
+                  <div class="col span-1-of-3">
+                    <label for="userName">User Name</label>
+                  </div>
+                  <div class="col span-2-of-3">
+                    <input
+                      type="email"
+                      name="userName"
+                      placeholder="User Name"
+                      id="form-user-name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col span-1-of-3">
+                    <label for="password">Password</label>
+                  </div>
+                  <div class="col span-2-of-3">
+                    <input
+                      type="password"
+                      name="password"
+                      id="form-password"
+                      placeholder="Password"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col span-1-of-3">
+                      <label for="role">Role</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <select name="role-name" id="form-role">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="login" class="btn-container">
+
+                  <div id="login-errors"></div>
+
+                  <input class="btn-submit" type="submit" value="Create Account" />
+
+                  <a id="go-back" href="#" class="btn btn-ghost"> Go Back</a> 
+
+                </div>
+              </form>
+            </div>
+          </div>
+          </div>
+        </section>
+      
+    </header>
+    
+    <!-- fotter -->
+    <footer>
+      <div class="row">
+        <div class="col span-1-of-2">
+          <ul class="footer-nav">
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">iOS App</a></li>
+            <li><a href="#">Android App</a></li>
+          </ul>
+        </div>
+        <div class="col span-1-of-2">
+          <ul class="social-links">
+            <li>
+              <a href="#">
+                <ion-icon class="facebook-logo" name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/?lang=es " target="_blank">
+                <ion-icon class="twitter-logo" name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <ion-icon class="wpp-logo" name="logo-whatsapp"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <ion-icon
+                  class="instagram-logo"
+                  name="logo-instagram"
+                ></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <p>Esta pagina no representa una empresa real!</p>
+      </div>
+    </footer>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+  </body>
 </html>
