@@ -155,7 +155,11 @@ function fetchAlbum() {
       }
     });
 }
-
+function GoToLogin() {
+  debugger;
+  sessionStorage.removeItem("jwt");
+  window.location.href = "login.html";
+}
 fetchAlbum();
 window.addEventListener("DOMContentLoaded", function (event) {
   function GoToArtist(event) {
@@ -250,6 +254,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       element.classList.toggle("form--hidden");
     });
   }
+  document.getElementById("log-out").addEventListener("click", GoToLogin);
   document.getElementById("switch-frm").addEventListener("click", switchForm);
   document
     .getElementById("save-info-changes")

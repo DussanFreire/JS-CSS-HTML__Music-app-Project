@@ -2,6 +2,7 @@ window.addEventListener("load", (event) => {
   function switchForm() {
     debugger;
     let infoForm = document.querySelectorAll(".contact-form");
+    document.getElementById("login-h2").textContent = "Choose your role";
     infoForm.forEach((element) => {
       element.classList.toggle("form--hidden");
     });
@@ -42,7 +43,7 @@ window.addEventListener("load", (event) => {
               if (data.roles[0] === "Admin") {
                 window.location.href = "index.html";
               } else {
-                window.location.href = "userIndex.html";
+                window.location.href = "userArtistGallery.html";
               }
             }
           });
@@ -68,7 +69,7 @@ window.addEventListener("load", (event) => {
     if (roleChosed === "admin") {
       window.location.href = "index.html";
     } else {
-      window.location.href = "userIndex.html";
+      window.location.href = "userArtistGallery.html";
     }
   }
   function goToCreateAccount() {

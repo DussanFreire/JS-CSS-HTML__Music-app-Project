@@ -66,14 +66,6 @@ button.btn-full {
   color: #fff;
 }
 
-button.btn-delete {
-  background-color: black;
-  margin-top: 5px;
-  border: 1px solid #9e0707;
-  border: 1px solid #9e0707;
-  color: #9e0707;
-}
-
 button.btn-ghost {
   background-color: black;
   margin-top: 5px;
@@ -159,7 +151,14 @@ header.menu {
 .main-nav li a:active {
   border-bottom: 2px solid #1db954;
 }
+#log-out {
+  color: #ce0c0c;
+}
 
+#log-out:hover,
+#log-out:active {
+  border-bottom: 2px solid #ce0c0c;
+}
 .main-nav {
   /* float: right; */
   list-style: none;
@@ -400,7 +399,7 @@ iframe {
 .gradient-bg {
   background: linear-gradient(-45deg, #358c3c, #611432, #182d35, #212423);
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 5s ease-in-out infinite;
 }
 
 @keyframes gradient {

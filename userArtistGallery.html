@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artists</title>
-    <script src="resources/js/app.js"></script>
-    <link rel="stylesheet" href="resources/css/styles-app.css" />
+    <script src="resources/js/artistsGallery.js"></script>
+    <link rel="stylesheet" href="resources/css/styles-artsits-gallery.css" />
     <link rel="stylesheet" href="resources/css/generic_styles.css" />
     <link rel="stylesheet" href="vendors/css/grid.css" />
     <link rel="stylesheet" href="vendors/css/normalize.css" />
@@ -23,7 +23,7 @@
     />
   </head>
   <!-- header -->
-  <header class="menu">
+  <header class="artis-bgr">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">MUSIC-NOW</a>
@@ -41,6 +41,13 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav main-nav">
             <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="">ARTISTS</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="userAlbumGallery.html">ALBUMS</a>
+            </li>
+            <li class="nav-item">
               <a id="log-out" class="nav-link active" href="#">
                 <div class="with-icon">
                   <span>LOG OUT</span>
@@ -57,16 +64,14 @@
     </div>
     <div class="hero-text-box">
       <div class="hero-btns">
-        <a class="btn btn-full" href="#artsts-added">Artist's added</a>
-        <a class="btn btn-ghost" href="#new-artist">Add new artist</a>
-        <!-- <a class="btn btn-full" href="#ofertas">Ofertas</a> -->
+        <a class="btn btn-full" href="#artsts-added">Artist's</a>
       </div>
     </div>
   </header>
   <!-- artists added -->
   <body>
     <section id="artsts-added" class="gradient-bg">
-      <h2 id="aritsts-added">Artist's added:</h2>
+      <h2 id="aritsts-added">Artist's:</h2>
       <div id="artists-container"></div>
       <div class="btn-container">
         <button id="fetch-btn" class="btn btn-ghost">
@@ -75,84 +80,6 @@
             <ion-icon name="reload-outline"></ion-icon>
           </div>
         </button>
-      </div>
-    </section>
-    <!-- new artist -->
-    <section id="new-artist">
-      <div class="form">
-        <div class="row">
-          <h2>Add a new artist here:</h2>
-        </div>
-        <div class="row">
-          <form
-            id="create-artist-frm"
-            method="post"
-            action="#"
-            class="contact-form"
-          >
-            <div class="row">
-              <div class="col span-1-of-3">
-                <label for="name">Name</label>
-              </div>
-              <div class="col span-2-of-3">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Artist real name"
-                  required
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col span-1-of-3">
-                <label for="artisticName">Artistic Name</label>
-              </div>
-              <div class="col span-2-of-3">
-                <input
-                  type="text"
-                  name="artisticName"
-                  placeholder="Artist artistic name"
-                  required
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col span-1-of-3">
-                <label for="artistDescription">Artist Description</label>
-              </div>
-              <div class="col span-2-of-3">
-                <input
-                  type="text"
-                  name="artistDescription"
-                  placeholder="Artist description"
-                  required
-                />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col span-1-of-3">
-                <label for="bornDate">Born Date</label>
-              </div>
-              <div class="col span-2-of-3">
-                <input type="date" name="bornDate" required />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col span-1-of-3">
-                <label for="Image">Image</label>
-              </div>
-              <div class="col span-2-of-3">
-                <input type="file" name="image" required />
-              </div>
-            </div>
-
-            <div class="btn-container">
-              <input type="submit" value="Create Artist" />
-            </div>
-          </form>
-        </div>
       </div>
     </section>
 

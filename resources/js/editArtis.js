@@ -188,6 +188,11 @@ function DeleteAlbum(event) {
     });
   }
 }
+function GoToLogin() {
+  debugger;
+  sessionStorage.removeItem("jwt");
+  window.location.href = "login.html";
+}
 function GoToEditAlbum(event) {
   let albumId = this.dataset.editAlbumId;
   window.location.href = `album.html?artistId=${artistId}&albumId=${albumId}`;
@@ -439,4 +444,5 @@ window.addEventListener("DOMContentLoaded", function (event) {
   document
     .getElementById("back-to-menu")
     .addEventListener("click", GoToArtists);
+  document.getElementById("log-out").addEventListener("click", GoToLogin);
 });

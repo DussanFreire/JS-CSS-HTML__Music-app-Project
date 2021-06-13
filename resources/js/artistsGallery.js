@@ -135,6 +135,12 @@ async function fetchArtists() {
 }
 fetchArtists();
 
+function GoToLogin() {
+  debugger;
+  sessionStorage.removeItem("jwt");
+  window.location.href = "login.html";
+}
 window.addEventListener("DOMContentLoaded", function (event) {
   document.getElementById("fetch-btn").addEventListener("click", fetchArtists);
+  document.getElementById("log-out").addEventListener("click", GoToLogin);
 });

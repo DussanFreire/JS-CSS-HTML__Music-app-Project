@@ -134,7 +134,11 @@ async function fetchArtists() {
   }
 }
 fetchArtists();
-
+function GoToLogin() {
+  debugger;
+  sessionStorage.removeItem("jwt");
+  window.location.href = "login.html";
+}
 window.addEventListener("DOMContentLoaded", function (event) {
   function PostArtist(event) {
     event.preventDefault();
@@ -175,7 +179,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
       }
     });
   }
-
+  document.getElementById("log-out").addEventListener("click", GoToLogin);
   document.getElementById("fetch-btn").addEventListener("click", fetchArtists);
   document
     .getElementById("create-artist-frm")
