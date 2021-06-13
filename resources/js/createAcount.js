@@ -1,6 +1,6 @@
 window.addEventListener("load", (event) => {
   const baseUrl = "http://localhost:16470/api/auth";
-  async function login(event) {
+  async function createAccount(event) {
     try {
       event.preventDefault();
       const userUrl = `${baseUrl}/User`;
@@ -56,12 +56,14 @@ window.addEventListener("load", (event) => {
       }
 
       if (userRole !== "") {
-        let fetchedAdminRoles = await fetch(userRoleUrl, {
+        let fetchedUserRoles = await fetch(userRoleUrl, {
           headers: { "Content-Type": "application/json; charset=utf-8" },
           method: "POST",
           body: JSON.stringify(userRole),
         });
       }
+      alert("The user was created!");
+      window.location.href = "login.html";
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +74,7 @@ window.addEventListener("load", (event) => {
   }
   document
     .getElementById("create-artist-frm")
-    .addEventListener("submit", login);
+    .addEventListener("submit", createAccount);
   document
     .getElementById("go-back")
     .addEventListener("click", goToCreateAccount);

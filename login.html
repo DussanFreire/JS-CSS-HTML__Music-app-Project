@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <header >
+    <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">MUSIC-NOW</a>
@@ -46,67 +46,92 @@
       </nav>
       <section id="new-artist">
         <div class="form">
-            <div id="prof-img">
-                <div class="artist-photo">
-                    <img src="resources/img/login.png" alt="pizza" />
+          <div id="prof-img">
+            <div class="artist-photo">
+              <img src="resources/img/login.png" alt="pizza" />
+            </div>
+          </div>
+          <div class="row">
+            <h2>Log in Please:</h2>
+          </div>
+          <div class="row">
+            <form
+              id="create-artist-frm"
+              method="post"
+              action="#"
+              class="contact-form"
+            >
+              <div class="row">
+                <div class="col span-1-of-3">
+                  <label for="userName">User Name</label>
                 </div>
-            </div>
-            <div class="row">
-              <h2>Log in Please:</h2>
-            </div>
+                <div class="col span-2-of-3">
+                  <input
+                    type="email"
+                    name="userName"
+                    placeholder="User Name"
+                    id="form-user-name"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col span-1-of-3">
+                  <label for="password">Password</label>
+                </div>
+                <div class="col span-2-of-3">
+                  <input
+                    type="password"
+                    name="password"
+                    id="form-password"
+                    placeholder="Password"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div id="login" class="btn-container">
+                <div id="login-errors"></div>
+
+                <input class="btn-submit" type="submit" value="Log in" />
+
+                <a id="create-account-btn" href="#" class="btn btn-ghost">
+                  Create new account</a
+                >
+              </div>
+            </form>
+
             <div class="row">
               <form
-                id="create-artist-frm"
+                id="select-role-frm"
                 method="post"
                 action="#"
-                class="contact-form"
+                class="contact-form form--hidden"
               >
                 <div class="row">
                   <div class="col span-1-of-3">
-                    <label for="userName">User Name</label>
+                    <label for="roleName">Role</label>
                   </div>
                   <div class="col span-2-of-3">
-                    <input
-                      type="email"
-                      name="userName"
-                      placeholder="User Name"
-                      id="form-user-name"
-                      required
-                    />
+                    <select name="roleName" id="form-role">
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                    </select>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col span-1-of-3">
-                    <label for="password">Password</label>
-                  </div>
-                  <div class="col span-2-of-3">
-                    <input
-                      type="password"
-                      name="password"
-                      id="form-password"
-                      placeholder="Password"
-                      required
-                    />
-                  </div>
+                <div id="login" class="btn-container">
+  
+                  <a id="btn-select-role" href="#" class="btn btn-full" >Select Role</a> 
                 </div>
                 
-                <div id="login" class="btn-container">
-
-                  <div id="login-errors"></div>
-
-                  <input class="btn-submit" type="submit" value="Log in" />
-
-                  <a id="create-account-btn" href="#" class="btn btn-ghost"> Create new account</a> 
-
                 </div>
               </form>
             </div>
           </div>
-          </div>
-        </section>
-      
+        </div>
+      </section>
     </header>
-    
+
     <!-- fotter -->
     <footer>
       <div class="row">

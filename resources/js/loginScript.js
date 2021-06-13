@@ -1,4 +1,12 @@
 window.addEventListener("load", (event) => {
+  function switchForm() {
+    debugger;
+    let infoForm = document.querySelectorAll(".contact-form");
+    infoForm.forEach((element) => {
+      element.classList.toggle("form--hidden");
+    });
+  }
+
   const baseUrl = "http://localhost:16470/api";
   function login(event) {
     debugger;
@@ -28,7 +36,15 @@ window.addEventListener("load", (event) => {
           response.json().then((data) => {
             debugger;
             sessionStorage.setItem("jwt", data.message);
-            window.location.href = "index.html";
+            if (data.roles.length > 1) {
+              switchForm();
+            } else {
+              if (data.roles[0] === "Admin") {
+                window.location.href = "index.html";
+              } else {
+                window.location.href = "userIndex.html";
+              }
+            }
           });
         } else {
           response.text().then((data) => {
@@ -44,7 +60,17 @@ window.addEventListener("load", (event) => {
         console.log(data);
       });
   }
-
+  function goToPageByRole() {
+    debugger;
+    let form = document.getElementById("select-role-frm");
+    event.preventDefault();
+    let roleChosed = form.roleName.value;
+    if (roleChosed === "admin") {
+      window.location.href = "index.html";
+    } else {
+      window.location.href = "userIndex.html";
+    }
+  }
   function goToCreateAccount() {
     window.location.href = "account-sign-up.html";
   }
@@ -54,4 +80,8 @@ window.addEventListener("load", (event) => {
   document
     .getElementById("create-account-btn")
     .addEventListener("click", goToCreateAccount);
+
+  document
+    .getElementById("btn-select-role")
+    .addEventListener("click", goToPageByRole);
 });
