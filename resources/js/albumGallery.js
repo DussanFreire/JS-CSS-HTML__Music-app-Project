@@ -5,28 +5,31 @@ if (!Boolean(sessionStorage.getItem("jwt"))) {
 const baseRawUrl = "http://localhost:16470";
 const baseUrl = baseRawUrl + "/api";
 
-function DeleteArtist(event) {
-  // debugger;
-  let artistId = this.dataset.deleteArtistId;
-  let url = `${baseUrl}/artists/${artistId}`;
-  if (window.confirm(`Are you sure to delete this artist from the list?`)) {
-    fetch(url, {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-      },
-      method: "DELETE",
-    }).then((data) => {
-      if (data.status === 200) {
-        location.reload();
-      }
-    });
-  }
-}
-function GoToEditArtist(event) {
+function LikeAlbum(event) {
   debugger;
-  let artistId = this.dataset.editArtistId;
-  window.location.href = `artist.html?artistId=${artistId}`;
+  let albumId = this.dataset.likeAlbumId;
+  let likes = Number(this.dataset.likeAlbumLikes) + 1;
+  let url = `${baseUrl}/albums/${albumId}`;
+  var data = {
+    Likes: likes,
+  };
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+    },
+    method: "PUT",
+    body: JSON.stringify(data),
+  }).then((data) => {
+    if (data.status === 200) {
+      location.reload();
+    }
+  });
+}
+function GoToEditAlbum(event) {
+  debugger;
+  // let artistId = this.dataset.editArtistId;
+  // window.location.href = `artist.html?artistId=${artistId}`;
 }
 function formatDate(dateStr) {
   dateDivided = dateStr.slice(0, 10).split("-");
@@ -49,39 +52,40 @@ function searchFunction() {
     }
   }
 }
+
 function createAlbumHTML(album) {
   const imageUrl = album.imagePath ? `${baseRawUrl}/${album.imagePath}` : "";
   return `<div class="plan-box album-photo">
-    <img src="${imageUrl}" alt="album" />
-    <p class="artist-name"> ${album.name}</p>
-    <ul>
-      <li>
-        <strong>Release Date</strong>: ${formatDate(album.releaseDate)}
-      </li>
-      <li>
-        <strong>Album Description</strong>: ${album.albumDescription}
-      </li>
-    </ul>
-  
-    <div class="btn-container">
-      <button
-        class="btn btn-full"
-        href="#clasicas"
-        type="button"
-        data-edit-album-id="${album.id}"
-      >
-        EDIT
-      </button>
-      <button
-        class="btn btn-ghost"
-        href="#clasicas"
-        type="button"
-        data-delete-album-id="${album.id}"
-      >
-        DELETE
-      </button>
-    </div>
-  </div>`;
+  <img src="${imageUrl}" alt="album" />
+  <div class="hover-like">${album.likes} likes</div>
+  <div class="hover-icon">
+  <a class="like-btn" 
+  data-like-album-id="${album.id}" 
+  data-like-album-likes="${album.likes}"
+  >
+  <ion-icon name="heart-outline"></ion-icon>
+  </a>
+  </div>
+  <p class="artist-name"> ${album.name}</p>
+  <ul>
+    <li>
+      <strong>Release Date</strong>: ${formatDate(album.releaseDate)}
+    </li>
+    <li>
+      <strong>Album Description</strong>: ${album.albumDescription}
+    </li>
+  </ul>
+
+  <div class="btn-container">
+    <button
+      class="btn btn-full"
+      href="#"
+      type="button"
+      data-edit-album-id="${album.id}"
+    >
+      VIEW
+  </div>
+</div>`;
 }
 async function fetchAlbums() {
   const urlAlbums = `${baseUrl}/AlbumsGallery`;
@@ -92,7 +96,6 @@ async function fetchAlbums() {
     },
     method: "GET",
   });
-  debugger;
   try {
     if (response.status == 200) {
       let data = await response.json();
@@ -120,14 +123,14 @@ async function fetchAlbums() {
       </div>`;
       document.getElementById("albums-container").innerHTML = albumContent;
 
-      let buttonsForDelete = document.querySelectorAll(
-        "albums-container div button[data-delete-album-id]"
+      let buttonsForLike = document.querySelectorAll(
+        "#albums-container div a[data-like-album-id]"
       );
-      for (const button of buttonsForDelete) {
-        button.addEventListener("click", DeleteAlbum);
+      for (const button of buttonsForLike) {
+        button.addEventListener("click", LikeAlbum);
       }
       let buttonsForUpdate = document.querySelectorAll(
-        "albums-container div button[data-edit-album-id]"
+        "#albums-container div button[data-edit-album-id]"
       );
       for (const button of buttonsForUpdate) {
         button.addEventListener("click", GoToEditAlbum);

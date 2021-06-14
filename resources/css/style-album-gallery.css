@@ -53,14 +53,6 @@ div.form {
   border-bottom: 2px solid #1db954;
 }
 
-.album-photo img {
-  opacity: 0.9;
-  width: 100%;
-  margin: 0%;
-  margin-bottom: 4%;
-  height: auto;
-  border-radius: 5px;
-}
 .list-not-empty {
   display: flex;
   flex-wrap: wrap;
@@ -107,4 +99,56 @@ header.album-bgr {
   background-size: cover; /*to see all the image  */
   height: 100vh; /* 100  view port*/
   background-attachment: fixed;
+}
+
+div.plan-box:hover img {
+  opacity: 0.7;
+  position: relative;
+}
+div.plan-box {
+  position: relative;
+}
+div.plan-box:hover > div.hover-like {
+  display: block;
+  opacity: 0.9;
+  padding: 1% 2%;
+}
+
+div.plan-box:hover > div.hover-icon {
+  display: inline;
+  opacity: 1;
+}
+div.plan-box .hover-like {
+  position: absolute;
+  display: none;
+  left: 5%;
+  top: 3%;
+  background-color: black;
+  border-radius: 5%;
+}
+
+div.plan-box .hover-icon {
+  position: absolute;
+  display: none;
+  right: 5%;
+
+  top: 2%;
+  background-color: black;
+  border-radius: 60px;
+  padding: 0.5em 0.6em;
+}
+.album-photo img {
+  width: 100%;
+  margin: 0%;
+  margin-bottom: 4%;
+  height: auto;
+  border-radius: 5px;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+a.like-btn {
+  color: white;
+}
+a.like-btn:hover {
+  color: red;
 }

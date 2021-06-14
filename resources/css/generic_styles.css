@@ -397,7 +397,7 @@ iframe {
 
 /* gradien bg */
 .gradient-bg {
-  background: linear-gradient(-45deg, #358c3c, #611432, #182d35, #212423);
+  background: linear-gradient(-45deg, #358c3c, #611432, #182d35);
   background-size: 400% 400%;
   animation: gradient 5s ease-in-out infinite;
 }
