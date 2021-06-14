@@ -20,7 +20,7 @@ div.form {
 }
 #login-errors {
   display: none;
-  padding: 0% 2% 2% 2%;
+  padding: 5% 0%;
   color: red;
 }
 
@@ -32,5 +32,43 @@ div.form {
   margin-right: 0px;
 }
 #login .btn-submit {
-  padding: 2%;
+  padding: 5%;
+}
+.plan-box {
+  background-color: rgba(0, 0, 0, 0.522);
+  width: 450px;
+  height: 800px;
+  border-radius: 5px;
+  padding-top: 2%;
+  font-size: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 2%;
+}
+
+.plan-box form div {
+  padding: 0%;
+  margin-bottom: 3%;
+  margin-left: 0%;
+}
+
+.artist-photo img {
+  width: 50%;
+  margin: 4% 25% 4% 25%;
+  height: auto;
+  transform: scale(1);
+  transition: transform 1s;
+}
+form.contact-form {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.btn-container input[type="email"],
+.btn-container input[type="password"] {
+  width: 130%;
+}
+#form-role {
+  width: 60%;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Log in</title>
     <script src="resources/js/loginScript.js"></script>
     <link rel="stylesheet" href="resources/css/styles-login.css" />
     <link rel="stylesheet" href="resources/css/generic_styles.css" />
@@ -47,28 +47,17 @@
 
 <!-- login -->
 
-      <section id="new-artist">
-        <div class="form">
-          <div id="prof-img">
-            <div class="artist-photo">
-              <img src="resources/img/login.png" alt="pizza" />
-            </div>
-          </div>
-          <div class="row">
-            <h2 id="login-h2">Log in Please:</h2>
-          </div>
-          <div class="row">
-            <form
+      <section id="new-artist" class="gradient-bg ">
+        <div class="plan-box artist-photo">
+          <img src="resources/img/login.png" alt="pizza" />
+          <h2 id="login-h2">Log in Please:</h2>
+          <form
               id="create-artist-frm"
               method="post"
               action="#"
-              class="contact-form"
+              class=" contact-form btn-container"
             >
-              <div class="row">
-                <div class="col span-1-of-3">
-                  <label for="userName">User Name</label>
-                </div>
-                <div class="col span-2-of-3">
+              <div class="btn-container">
                   <input
                     type="email"
                     name="userName"
@@ -76,13 +65,8 @@
                     id="form-user-name"
                     required
                   />
-                </div>
               </div>
-              <div class="row">
-                <div class="col span-1-of-3">
-                  <label for="password">Password</label>
-                </div>
-                <div class="col span-2-of-3">
+              <div class="btn-container">
                   <input
                     type="password"
                     name="password"
@@ -90,7 +74,6 @@
                     placeholder="Password"
                     required
                   />
-                </div>
               </div>
 
               <div id="login" class="btn-container">
@@ -103,33 +86,23 @@
                 >
               </div>
             </form>
-
-            <div class="row">
-              <form
+            <form
                 id="select-role-frm"
                 method="post"
                 action="#"
                 class="contact-form form--hidden"
               >
-                <div class="row">
-                  <div class="col span-1-of-3">
-                    <label for="roleName">Role</label>
-                  </div>
-                  <div class="col span-2-of-3">
+                  <div class="btn-container">
                     <select name="roleName" id="form-role">
                       <option value="admin">Admin</option>
                       <option value="user">User</option>
                     </select>
-                  </div>
                 </div>
-                <div id="login" class="btn-container">
-  
+                <div class="btn-container">
                   <a id="btn-select-role" href="#" class="btn btn-full" >Select Role</a> 
                 </div>
                 
-                </div>
               </form>
-            </div>
           </div>
         </div>
       </section>
