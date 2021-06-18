@@ -5,32 +5,31 @@ if (!Boolean(sessionStorage.getItem("jwt"))) {
 const baseRawUrl = "http://localhost:16470";
 const baseUrl = baseRawUrl + "/api";
 
-function DeleteArtist(event) {
-  // debugger;
-  let artistId = this.dataset.deleteArtistId;
-  let url = `${baseUrl}/artists/${artistId}`;
-  if (window.confirm(`Are you sure to delete this artist from the list?`)) {
-    fetch(url, {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-      },
-      method: "DELETE",
-    }).then((data) => {
-      if (data.status === 200) {
-        location.reload();
-      }
-    });
-  }
-}
-function GoToEditArtist(event) {
+function FollowArtist(event) {
   debugger;
-  let artistId = this.dataset.editArtistId;
-  window.location.href = `artist.html?artistId=${artistId}`;
+  let artistId = this.dataset.followersArtistId;
+  let followers = Number(this.dataset.artistFollowers) + 1;
+  let url = `${baseUrl}/artists/${artistId}`;
+  var data = {
+    Followers: followers,
+  };
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+    },
+    method: "PUT",
+    body: JSON.stringify(data),
+  }).then((data) => {
+    if (data.status === 200) {
+      location.reload();
+    }
+  });
 }
-function formatDate(dateStr) {
-  dateDivided = dateStr.slice(0, 10).split("-");
-  return `${dateDivided[2]}-${dateDivided[1]}-${dateDivided[0]}`;
+function GotToArtist(event) {
+  debugger;
+  let artistId = this.dataset.goToArtistId;
+  window.location.href = `artist.html?artistId=${artistId}`;
 }
 
 function searchFunction() {
@@ -67,29 +66,26 @@ async function fetchArtists() {
         const imageUrl = artist.imagePath
           ? `${baseRawUrl}/${artist.imagePath}`
           : "";
-        return `<div class="plan-box artist-photo"> 
-                      <img  src="${imageUrl}" alt="artist"/>
-                      <p class="artist-name"> ${artist.artisticName}</p>
-                      <ul>
-                        <li><strong>Name</strong>: ${artist.name}</li>
-                        <li><strong>Born Date</strong>: ${formatDate(
-                          artist.bornDate
-                        )}</li>
-                        <li><strong>Artist Description</strong>: ${
-                          artist.artistDescription
-                        }</li>
-                      </ul>
-                     
-                      <div class="btn-container">
-                        
-                        <button class="btn btn-full" href="#" type="button" data-edit-artist-id="${
-                          artist.id
-                        }">EDIT</button>
-    
-                        <button class="btn btn-ghost"  href="#" type="button" data-delete-artist-id="${
-                          artist.id
-                        }">DELETE</button>
-                     </div></div>`;
+        return `
+        <a class="pln-btn" 
+        data-go-to-artist-id="${artist.id}"
+        >
+          <div class="plan-box artist-photo"> 
+            <img  src="${imageUrl}" alt="artist"/>
+            <div class="hover-like">
+              ${artist.followers} followers
+            </div>
+            <div class="hover-icon">
+              <a class="like-btn" 
+              data-followers-artist-id="${artist.id}" 
+              data-artist-followers="${artist.followers}"
+              >
+                <ion-icon name="heart-outline"></ion-icon>
+              </a>
+            </div>
+            <p class="artist-name"> ${artist.artisticName}</p>
+          </div>
+        </a>`;
       });
       let content = artistsLi.join("");
       var artistContent =
@@ -112,16 +108,16 @@ async function fetchArtists() {
       document.getElementById("artists-container").innerHTML = artistContent;
 
       let buttonsForDelete = document.querySelectorAll(
-        "#artists-container div button[data-delete-artist-id]"
+        "#artists-container a[data-followers-artist-id]"
       );
       for (const button of buttonsForDelete) {
-        button.addEventListener("click", DeleteArtist);
+        button.addEventListener("click", FollowArtist);
       }
       let buttonsForUpdate = document.querySelectorAll(
-        "#artists-container div button[data-edit-artist-id]"
+        "#artists-container a[data-go-to-artist-id]"
       );
       for (const button of buttonsForUpdate) {
-        button.addEventListener("click", GoToEditArtist);
+        button.addEventListener("click", GotToArtist);
       }
       searchFunction();
     } else {

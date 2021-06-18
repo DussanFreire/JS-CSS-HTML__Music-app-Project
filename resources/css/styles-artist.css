@@ -3,7 +3,7 @@
   justify-content: center;
 }
 div.form {
-  margin-bottom: 5%;
+  margin-bottom: 1%;
 }
 .f-btn {
   margin: 0% 1% 2% 1%;
@@ -38,7 +38,6 @@ body {
   background-color: black;
   background-position: center; /* centrar la imagen */
   background-size: cover; /*to see all the image  */
-  height: 100vh; /* 100  view port*/
   background-attachment: fixed;
 }
 section.artist-section {

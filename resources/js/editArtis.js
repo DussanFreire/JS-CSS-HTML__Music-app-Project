@@ -57,7 +57,7 @@ function createInfoForm(artist) {
         </div>
         <div class="row">
           <div class="col span-1-of-3">
-            <label for="artistDescription">Artist Description</label>
+            <label for="artistDescription">Description</label>
           </div>
           <div class="col span-2-of-3">
             <input
