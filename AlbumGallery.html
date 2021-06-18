@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artists</title>
-    <script src="resources/js/artistsGallery.js"></script>
-    <link rel="stylesheet" href="resources/css/styles-artsits-gallery.css" />
+    <title>Albums Gallery</title>
+    <script src="resources/js/albumGallery.js"></script>
+    <link rel="stylesheet" href="resources/css/style-album-gallery.css" />
     <link rel="stylesheet" href="resources/css/generic_styles.css" />
     <link rel="stylesheet" href="vendors/css/grid.css" />
     <link rel="stylesheet" href="vendors/css/normalize.css" />
+    <link rel="stylesheet" href="vendors/css/w3.css" />
     <!-- font family -->
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&display=swap"
@@ -23,7 +24,7 @@
     />
   </head>
   <!-- header -->
-  <header class="artis-bgr">
+  <header class="album-bgr">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">MUSIC-NOW</a>
@@ -41,11 +42,16 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav main-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">ARTISTS</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="./ArtistGallery.html"
+                >ARTISTS</a
+              >
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active" href="userAlbumGallery.html">ALBUMS</a>
+              <a class="nav-link active" href="AlbumGallery.html">ALBUMS</a>
             </li>
             <li class="nav-item">
               <a id="log-out" class="nav-link active" href="#">
@@ -60,19 +66,19 @@
       </div>
     </nav>
     <div class="row nav-row">
-      <div class="tittle">Artists</div>
+      <div class="tittle">Albums</div>
     </div>
     <div class="hero-text-box">
       <div class="hero-btns">
-        <a class="btn btn-full" href="#artsts-added">Artist's</a>
+        <a class="btn btn-full" href="#albums-added">Albums's</a>
       </div>
     </div>
   </header>
   <!-- artists added -->
   <body>
-    <section id="artsts-added" class="gradient-bg">
-      <h2 id="aritsts-added">Artist's:</h2>
-      <div id="artists-container"></div>
+    <section id="albums-added" class="gradient-bg">
+      <h2>Album's added:</h2>
+      <div id="albums-container"></div>
       <div class="btn-container">
         <button id="fetch-btn" class="btn btn-ghost">
           <div class=".with-icon">
