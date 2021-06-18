@@ -8,8 +8,9 @@ const baseUrl = baseRawUrl + "/api";
 function LikeAlbum(event) {
   debugger;
   let albumId = this.dataset.likeAlbumId;
+  let artistId = this.dataset.likeArtistId;
   let likes = Number(this.dataset.likeAlbumLikes) + 1;
-  let url = `${baseUrl}/albums/${albumId}`;
+  let url = `${baseUrl}/artists/${artistId}/albums/${albumId}`;
   var data = {
     Likes: likes,
   };
@@ -26,10 +27,11 @@ function LikeAlbum(event) {
     }
   });
 }
-function GoToEditAlbum(event) {
+function GoToAlbum(event) {
   debugger;
-  // let artistId = this.dataset.editArtistId;
-  // window.location.href = `artist.html?artistId=${artistId}`;
+  let albumId = this.dataset.goToAlbumId;
+  let artistId = this.dataset.goToArtistId;
+  window.location.href = `album.html?artistId=${artistId}&albumId=${albumId}`;
 }
 function formatDate(dateStr) {
   dateDivided = dateStr.slice(0, 10).split("-");
@@ -55,38 +57,31 @@ function searchFunction() {
 
 function createAlbumHTML(album) {
   const imageUrl = album.imagePath ? `${baseRawUrl}/${album.imagePath}` : "";
-  return `<div class="plan-box album-photo">
-  <img src="${imageUrl}" alt="album" />
-  <div class="hover-like">${album.likes} likes</div>
-  <div class="hover-icon">
-  <a class="like-btn" 
-  data-like-album-id="${album.id}" 
-  data-like-album-likes="${album.likes}"
+  return `
+  <a class="pln-btn" 
+  data-go-to-album-id="${album.albumId}"
+  data-go-to-artist-id="${album.artistId}"
   >
-  <ion-icon name="heart-outline"></ion-icon>
-  </a>
-  </div>
-  <p class="artist-name"> ${album.name}</p>
-  <ul>
-    <li>
-      <strong>Release Date</strong>: ${formatDate(album.releaseDate)}
-    </li>
-    <li>
-      <strong>Album Description</strong>: ${album.albumDescription}
-    </li>
-  </ul>
-
-  <div class="btn-container">
-    <button
-      class="btn btn-full"
-      href="#"
-      type="button"
-      data-edit-album-id="${album.id}"
-    >
-      VIEW
-  </div>
-</div>`;
+    <div class="plan-box album-photo">
+      <img src="${imageUrl}" alt="album" />
+      <div class="hover-like">
+        ${album.likes} likes
+      </div>
+      <div class="hover-icon">
+        <a class="like-btn" 
+        data-like-album-id="${album.albumId}" 
+        data-like-album-likes="${album.likes}"
+        data-like-artist-id="${album.artistId}"
+        >
+        <ion-icon name="heart-outline"></ion-icon>
+        </a>
+      </div>
+      <p class="album-name"> ${album.albumName}</p>
+      <p class="artist-name"> ${album.artistName}</p>
+    </div>
+  </a>`;
 }
+
 async function fetchAlbums() {
   const urlAlbums = `${baseUrl}/AlbumsGallery`;
   let response = await fetch(urlAlbums, {
@@ -99,7 +94,7 @@ async function fetchAlbums() {
   try {
     if (response.status == 200) {
       let data = await response.json();
-      // debugger;
+      debugger;
       let albumsLi = data.map((album) => {
         return createAlbumHTML(album);
       });
@@ -130,10 +125,10 @@ async function fetchAlbums() {
         button.addEventListener("click", LikeAlbum);
       }
       let buttonsForUpdate = document.querySelectorAll(
-        "#albums-container div button[data-edit-album-id]"
+        "#albums-container a[data-go-to-album-id].pln-btn"
       );
       for (const button of buttonsForUpdate) {
-        button.addEventListener("click", GoToEditAlbum);
+        button.addEventListener("click", GoToAlbum);
       }
       searchFunction();
     } else {
