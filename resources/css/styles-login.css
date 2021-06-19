@@ -7,6 +7,7 @@ div.form {
   height: auto;
   border-radius: 50%;
 }
+
 .artist-photo {
   margin-top: 0%;
   width: 50%;
@@ -37,7 +38,6 @@ div.form {
 .plan-box {
   background-color: rgba(0, 0, 0, 0.522);
   width: 450px;
-  height: 800px;
   border-radius: 5px;
   padding-top: 2%;
   font-size: 100%;
@@ -53,13 +53,6 @@ div.form {
   margin-left: 0%;
 }
 
-.artist-photo img {
-  width: 50%;
-  margin: 4% 25% 4% 25%;
-  height: auto;
-  transform: scale(1);
-  transition: transform 1s;
-}
 form.contact-form {
   width: 100%;
   margin: 0 auto;

@@ -29,7 +29,7 @@ function FollowArtist(event) {
 function GotToArtist(event) {
   debugger;
   let artistId = this.dataset.goToArtistId;
-  window.location.href = `artist.html?artistId=${artistId}`;
+  window.location.href = `artistProfile.html?artistId=${artistId}`;
 }
 
 function searchFunction() {
