@@ -79,12 +79,3 @@ window.addEventListener("load", (event) => {
     .getElementById("go-back")
     .addEventListener("click", goToCreateAccount);
 });
-// ;
-//         let lastResponse = response[1];
-//         debugger;
-
-//         if (lastResponse.status === 200) {
-//           alert("Account created!");
-//           window.location.href = "login.html";
-//         }
-//       })

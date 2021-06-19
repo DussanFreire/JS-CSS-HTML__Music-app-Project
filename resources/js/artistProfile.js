@@ -10,6 +10,13 @@ const url = `${baseUrl}/artists/${artistId}`;
 function GoToArtists(event) {
   window.location.href = `ArtistGallery.html`;
 }
+
+function GoToAlbum(event) {
+  debugger;
+  let albumId = this.dataset.goToAlbumId;
+  let artistId = this.dataset.goToArtistId;
+  window.location.href = `albums.html?artistId=${artistId}&albumId=${albumId}`;
+}
 function formatDate(dateStr) {
   dateDivided = dateStr.slice(0, 10).split("-");
   return `${dateDivided[2]}-${dateDivided[1]}-${dateDivided[0]}`;
@@ -91,7 +98,7 @@ function createInfoForm(artist) {
 function createAlbumHTML(album) {
   const imageUrl = album.imagePath ? `${baseRawUrl}/${album.imagePath}` : "";
   return `  <a class="pln-btn" 
-  data-go-to-album-id="${album.albumId}"
+  data-go-to-album-id="${album.id}"
   data-go-to-artist-id="${album.artistId}"
   >
     <div class="plan-box album-photo">
@@ -101,7 +108,7 @@ function createAlbumHTML(album) {
       </div>
       <div class="hover-icon">
         <a class="like-btn" 
-        data-like-album-id="${album.albumId}" 
+        data-like-album-id="${album.id}" 
         data-like-album-likes="${album.likes}"
         data-like-artist-id="${album.artistId}"
         >
@@ -113,7 +120,28 @@ function createAlbumHTML(album) {
     </div>
   </a>`;
 }
-
+function LikeAlbum(event) {
+  debugger;
+  let albumId = this.dataset.likeAlbumId;
+  let artistId = this.dataset.likeArtistId;
+  let likes = Number(this.dataset.likeAlbumLikes) + 1;
+  let url = `${baseUrl}/artists/${artistId}/albums/${albumId}`;
+  var data = {
+    Likes: likes,
+  };
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+    },
+    method: "PUT",
+    body: JSON.stringify(data),
+  }).then((data) => {
+    if (data.status === 200) {
+      location.reload();
+    }
+  });
+}
 function searchFunction() {
   var input, filter, divContent, txtValue, planBoxes, name;
   input = document.getElementById("myInput");

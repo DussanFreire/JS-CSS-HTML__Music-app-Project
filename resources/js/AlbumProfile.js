@@ -12,9 +12,6 @@ var albumId = queryParams[1][1];
 
 const url = `${baseUrl}/artists/${artistId}/albums/${albumId}`;
 
-function GoToArtists(event) {
-  window.location.href = `ArtistGallery.html`;
-}
 function formatDate(dateStr) {
   dateDivided = dateStr.slice(0, 10).split("-");
   return `${dateDivided[2]}-${dateDivided[1]}-${dateDivided[0]}`;
@@ -42,7 +39,7 @@ function getAlbumInfo(albumData, artistData, imageUrl) {
             albumData.releaseDate
           )}</span></p>
           <p>Likes: <span> ${albumData.likes}</span></p>
-          <p>Likes: <span> ${albumData.albumDescription}</span></p>
+          <p>Description: <span> ${albumData.albumDescription}</span></p>
       </div>
   
     </div>`;
