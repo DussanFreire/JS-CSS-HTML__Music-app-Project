@@ -8,8 +8,7 @@ var artistId = queryParams[1].split("=")[1];
 const url = `${baseUrl}/artists/${artistId}`;
 
 function GoToArtists(event) {
-  // debugger;
-  window.location.href = `index.html#artsts-added`;
+  window.location.href = `ArtistGallery.html`;
 }
 function formatDate(dateStr) {
   dateDivided = dateStr.slice(0, 10).split("-");
@@ -109,7 +108,7 @@ function createAlbumHTML(album) {
         <ion-icon name="heart-outline"></ion-icon>
         </a>
       </div>
-      <p class="album-name"> ${album.albumName}</p>
+      <p class="album-name"> ${album.name}</p>
       <p class="artist-name"> ${formatDate(album.releaseDate)}</p>
     </div>
   </a>`;
@@ -190,7 +189,8 @@ function fetchArtist() {
 }
 
 async function fetchAlbums() {
-  const urlAlbums = `${baseUrl}/AlbumsGallery`;
+  debugger;
+  const urlAlbums = `${baseUrl}/Artists/${artistId}/Albums`;
   let response = await fetch(urlAlbums, {
     headers: {
       "Content-Type": "application/json; charset=utf-8",

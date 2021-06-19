@@ -298,7 +298,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   // PUT
 
   function UpdateArtistInfo(event) {
-    // debugger;
+    debugger;
     event.preventDefault();
     form = document.getElementById("edit-artist-form");
     if (!form.name.value) {

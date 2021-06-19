@@ -38,6 +38,7 @@ div.form {
 .plan-box {
   background-color: rgba(0, 0, 0, 0.522);
   width: 450px;
+  height: 650px;
   border-radius: 5px;
   padding-top: 2%;
   font-size: 100%;

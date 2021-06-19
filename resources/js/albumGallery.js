@@ -31,7 +31,7 @@ function GoToAlbum(event) {
   debugger;
   let albumId = this.dataset.goToAlbumId;
   let artistId = this.dataset.goToArtistId;
-  window.location.href = `album.html?artistId=${artistId}&albumId=${albumId}`;
+  window.location.href = `albums.html?artistId=${artistId}&albumId=${albumId}`;
 }
 function formatDate(dateStr) {
   dateDivided = dateStr.slice(0, 10).split("-");
