@@ -193,3 +193,9 @@ p.album-name {
   text-align: left;
   text-transform: capitalize;
 }
+audio {
+  margin-left: 5%;
+  background-color: white;
+  border-bottom-color: red;
+  width: 90%;
+}
