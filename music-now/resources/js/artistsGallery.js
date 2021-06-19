@@ -2,13 +2,30 @@ if (!Boolean(sessionStorage.getItem("jwt"))) {
   window.location.href = "../login.html";
 }
 
+let dictArtistLiked = {};
+
 const baseRawUrl = "http://localhost:16470";
 const baseUrl = baseRawUrl + "/api";
 
+function GotToArtist(event) {
+  debugger;
+  let artistId = this.dataset.goToArtistId;
+  window.location.href = `artist.html?artistId=${artistId}`;
+}
 function FollowArtist(event) {
   debugger;
   let artistId = this.dataset.followersArtistId;
-  let followers = Number(this.dataset.artistFollowers) + 1;
+  let followers;
+  let state = dictArtistLiked[artistId];
+  if (state === false) {
+    followers = Number(this.dataset.artistFollowers) + 1;
+    dictArtistLiked[artistId] = true;
+  } else if (state === true) {
+    followers = Number(this.dataset.artistFollowers) - 1;
+    dictArtistLiked[artistId] = false;
+  }
+  console.log(dictArtistLiked);
+
   let url = `${baseUrl}/artists/${artistId}`;
   var data = {
     Followers: followers,
@@ -22,16 +39,10 @@ function FollowArtist(event) {
     body: JSON.stringify(data),
   }).then((data) => {
     if (data.status === 200) {
-      location.reload();
+      fetchArtists();
     }
   });
 }
-function GotToArtist(event) {
-  debugger;
-  let artistId = this.dataset.goToArtistId;
-  window.location.href = `artist.html?artistId=${artistId}`;
-}
-
 function searchFunction() {
   var input, filter, divContent, txtValue, planBoxes, name;
   input = document.getElementById("myInput");
@@ -62,7 +73,13 @@ async function fetchArtists() {
     if (response.status == 200) {
       let data = await response.json();
       // debugger;
+      console.log(dictArtistLiked);
+      let dictEmpty = Object.keys(dictArtistLiked).length === 0;
       let artistsLi = data.map((artist) => {
+        if (dictEmpty) {
+          dictArtistLiked[artist.id] = false;
+        }
+
         const imageUrl = artist.imagePath
           ? `${baseRawUrl}/${artist.imagePath}`
           : "";
@@ -80,13 +97,19 @@ async function fetchArtists() {
               data-followers-artist-id="${artist.id}" 
               data-artist-followers="${artist.followers}"
               >
-                <ion-icon name="heart-outline"></ion-icon>
+              ${
+                dictArtistLiked[artist.id] === true
+                  ? `<ion-icon name="heart-dislike-outline"></ion-icon>`
+                  : `<ion-icon name="heart-outline"></ion-icon>`
+              }
               </a>
             </div>
             <p class="artist-name"> ${artist.artisticName}</p>
           </div>
         </a>`;
       });
+      console.log(dictArtistLiked);
+
       let content = artistsLi.join("");
       var artistContent =
         data.length > 0

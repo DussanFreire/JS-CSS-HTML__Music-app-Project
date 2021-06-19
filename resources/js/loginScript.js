@@ -43,7 +43,7 @@ window.addEventListener("load", (event) => {
               if (data.roles[0] === "Admin") {
                 window.location.href = "index.html";
               } else {
-                window.location.href = "userProfile/artists.html";
+                window.location.href = "music-now/artists.html";
               }
             }
           });
@@ -69,7 +69,7 @@ window.addEventListener("load", (event) => {
     if (roleChosed === "admin") {
       window.location.href = "index.html";
     } else {
-      window.location.href = "userProfile/artists.html";
+      window.location.href = "music-now/artists.html";
     }
   }
   function goToCreateAccount() {

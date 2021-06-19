@@ -8,7 +8,7 @@ var artistId = queryParams[1].split("=")[1];
 const url = `${baseUrl}/artists/${artistId}`;
 
 function GoToArtists(event) {
-  window.location.href = `ArtistGallery.html`;
+  window.location.href = `artists.html`;
 }
 
 function GoToAlbum(event) {
@@ -138,7 +138,7 @@ function LikeAlbum(event) {
     body: JSON.stringify(data),
   }).then((data) => {
     if (data.status === 200) {
-      location.reload();
+      fetchAlbums();
     }
   });
 }

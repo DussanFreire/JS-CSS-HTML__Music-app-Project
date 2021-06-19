@@ -23,7 +23,7 @@ function LikeAlbum(event) {
     body: JSON.stringify(data),
   }).then((data) => {
     if (data.status === 200) {
-      location.reload();
+      fetchAlbums();
     }
   });
 }
