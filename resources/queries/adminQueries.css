@@ -1,0 +1,196 @@
+/* Big tablet to 1200px (widths smaller taht the 1140px row) */
+@media only screen and (max-width: 1200px) {
+  .hero-text-box {
+    width: 100%;
+    padding: 0 2%;
+  }
+
+  .row {
+    padding: 0 2%;
+  }
+  .artist-photo {
+    padding-top: 20%;
+    padding-bottom: 20%;
+  }
+}
+
+/* Small tablet to big tablet: from 768px to 1023px */
+@media only screen and (max-width: 1023px) {
+  body {
+    font-size: 18px;
+  }
+  section {
+    padding: 60px 0;
+  }
+  .artist-presentation {
+    flex-direction: column;
+  }
+  .artist-photo {
+    width: 40%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  .artist-info p {
+    font-size: 105%;
+  }
+  .app-screen {
+    width: 50%;
+  }
+
+  .contact-form {
+    width: 80%;
+  }
+  .list-not-empty div.album-photo,
+  .list-not-empty div.artist-photo {
+    background-color: rgb(0, 0, 0);
+    width: 31.2%;
+    height: auto;
+    border-radius: 5px;
+    font-size: 100%;
+    display: block;
+    color: white;
+    margin: 1.6% 0% 0% 1.6%;
+  }
+}
+@media only screen and (max-width: 950) {
+  .artist-photo {
+    width: 50%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  .artist-info p {
+    font-size: 115%;
+  }
+  .list-not-empty div.album-photo,
+  .list-not-empty div.artist-photo {
+    background-color: rgb(0, 0, 0);
+    width: 31.2%;
+    height: auto;
+    border-radius: 5px;
+    font-size: 100%;
+    display: block;
+    color: white;
+    margin: 1.6% 0% 0% 1.6%;
+  }
+  .form-btns {
+    flex-direction: column;
+  }
+}
+/* Small phones to small tablets: from 481px to 767px */
+@media only screen and (max-width: 767px) {
+  .artist-photo {
+    width: 50%;
+    padding-top: 10%;
+    padding-bottom: 5%;
+  }
+  .artist-info p {
+    font-size: 125%;
+  }
+  body {
+    font-size: 16px;
+  }
+
+  section {
+    padding: 30px 0;
+  }
+
+  .row,
+  .hero-text-box {
+    padding: 0 4%;
+  }
+  .col {
+    width: 100%;
+    margin: 0 0 4% 0;
+  }
+
+  .main-nav {
+    display: none;
+  }
+  .mobile-nav-icon {
+    display: inline-block;
+  }
+
+  .main-nav {
+    float: left;
+    margin-top: 30px;
+    margin-left: 25px;
+  }
+
+  .main-nav li {
+    display: block;
+  }
+
+  .main-nav li a:link,
+  .main-nav li a:visited {
+    display: block;
+    border: 0;
+    padding: 10px 0;
+    font-size: 100%;
+  }
+
+  .sticky .main-nav {
+    margin-top: 10px;
+  }
+
+  .sticky .main-nav li a:link,
+  .sticky .main-nav li a:visited {
+    padding: 10px 0;
+  }
+  .sticky .mobile-nav-icon {
+    margin-top: 10px;
+  }
+  .sticky .mobile-nav-icon i {
+    color: #555;
+  }
+
+  h1 {
+    font-size: 180%;
+  }
+  h2 {
+    font-size: 150%;
+  }
+  .list-not-empty div.album-photo,
+  .list-not-empty div.artist-photo {
+    background-color: rgb(0, 0, 0);
+    width: 47.6%;
+    height: auto;
+    border-radius: 5px;
+    font-size: 100%;
+    display: block;
+    color: white;
+    margin: 1.6% 0% 0% 1.6%;
+  }
+  #myInput {
+    background-repeat: no-repeat;
+    margin-left: 1.6%;
+    width: 96.8%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .artist-photo {
+    width: 55%;
+    padding-top: 20%;
+    padding-bottom: 5%;
+  }
+  .artist-info p {
+    font-size: 120%;
+  }
+  .artist-info {
+    padding-bottom: 0%;
+  }
+}
+
+/* Small phones: from 0 to 480px */
+@media only screen and (max-width: 480px) {
+  section {
+    padding: 25px 0;
+  }
+  .contact-form {
+    width: 100%;
+  }
+  #myInput {
+    background-repeat: no-repeat;
+    margin-left: 5%;
+    width: 90%;
+  }
+}

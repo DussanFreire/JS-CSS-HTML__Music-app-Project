@@ -73,7 +73,7 @@ window.addEventListener("load", (event) => {
     }
   }
   function goToCreateAccount() {
-    window.location.href = "account-sign-up.html";
+    window.location.href = "account.html";
   }
   document
     .getElementById("create-artist-frm")

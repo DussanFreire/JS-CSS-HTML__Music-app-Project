@@ -109,7 +109,7 @@ section.artist-section {
   justify-content: flex-start;
   margin-right: 1.6%;
 }
-.list-not-empty > div.album-photo {
+.list-not-empty div.album-photo {
   background-color: rgb(0, 0, 0);
   width: 15%;
   height: auto;
